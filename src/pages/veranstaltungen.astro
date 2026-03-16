@@ -2,14 +2,67 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 
-const events = [
+interface Event {
+  title: string;
+  date: string;
+  dateEnd?: string;
+  location: string;
+  description: string;
+  category: string;
+  time?: string;
+  recurring?: boolean;
+}
+
+const events: Event[] = [
+  // --- Januar / Februar ---
   {
-    title: "Osterfeuer in der Ith-Region",
-    date: "2026-04-04",
-    location: "Verschiedene Ortsteile",
-    description: "Traditionelles Osterfeuer in mehreren Ortsteilen – ein geselliges Event für die ganze Familie.",
-    category: "Tradition",
+    title: "Braunkohlwanderung im winterlichen Hils",
+    date: "2026-02-01",
+    location: "Hils / Delligsen",
+    description: "Traditionelle Winterwanderung durch den Hils mit anschließendem Braunkohl-Essen. Organisiert vom Heimatverein Delligsen.",
+    category: "Wandern",
   },
+  // --- März ---
+  {
+    title: "Rasti-Land Saisoneröffnung",
+    date: "2026-03-21",
+    location: "Rasti-Land, Salzhemmendorf",
+    description: "Saisonstart des Freizeitparks mit über 45 Attraktionen für die ganze Familie – von Märchenwelten über Afrika-Themen bis zu Dinosauriern.",
+    category: "Familie",
+  },
+  // --- April ---
+  {
+    title: "Osterfeuer Salzhemmendorf",
+    date: "2026-04-04",
+    location: "Parkplatz am Sportplatz, Salzhemmendorf",
+    description: "Traditionelles Osterfeuer ab 18:30 Uhr, organisiert vom SV Blau-Weiß. Ostereiersuche und Osterdreikampf für Kinder ab 19:00 Uhr.",
+    category: "Tradition",
+    time: "18:30 Uhr",
+  },
+  {
+    title: "Osterfeuer Coppenbrügge",
+    date: "2026-04-04",
+    location: "Sportplatz Brunnenstraße, Coppenbrügge",
+    description: "Traditionelles Osterfeuer am Karsamstag. Jahrhundertealte Tradition im Weserbergland mit Musik und Verpflegung.",
+    category: "Tradition",
+    time: "18:00 Uhr",
+  },
+  {
+    title: "Burgmuseum Coppenbrügge – Saisonstart",
+    date: "2026-04-01",
+    location: "Burg Coppenbrügge",
+    description: "Eröffnung der Museumssaison. Dauerausstellung zur Geschichte der Grafen von Spiegelberg, Geologie und Handwerk. Do–So + Feiertage, 14–17 Uhr.",
+    category: "Kultur",
+  },
+  {
+    title: "Ith-Hils-Ultratrail",
+    date: "2026-04-25",
+    location: "Salzhemmendorf (Start/Ziel)",
+    description: "10. Auflage des Trailrunning-Events über 81 km mit 2.100 Höhenmetern auf dem Ith-Hils-Weg. Zwei Startzeiten, Ausstieg nach 51 km möglich. Limitiert auf 80 Teilnehmer.",
+    category: "Sport",
+    time: "06:00 / 08:00 Uhr",
+  },
+  // --- Mai ---
   {
     title: "Frühlingsmarkt Salzhemmendorf",
     date: "2026-05-09",
@@ -17,34 +70,146 @@ const events = [
     description: "Regionale Produkte, Kunsthandwerk und kulinarische Spezialitäten beim Frühlingsmarkt.",
     category: "Markt",
   },
+  // --- Juni / Juli ---
   {
-    title: "Ith-Wandertag",
-    date: "2026-06-14",
-    location: "Wanderparkplatz Ith",
-    description: "Geführte Wanderungen auf verschiedenen Routen mit Rahmenprogramm und Verpflegung.",
-    category: "Wandern",
-  },
-  {
-    title: "Sommerfest Coppenbrügge",
-    date: "2026-07-18",
-    location: "Burggelände Coppenbrügge",
-    description: "Musik, Kulinarik und Unterhaltung auf dem historischen Burggelände.",
-    category: "Fest",
-  },
-  {
-    title: "Erntefest",
-    date: "2026-09-12",
-    location: "Verschiedene Ortsteile",
-    description: "Traditionelles Erntefest mit Umzug, Musik und regionalen Spezialitäten.",
+    title: "Schützenfest Salzhemmendorf",
+    date: "2026-06-27",
+    location: "Salzhemmendorf",
+    description: "Traditionelles Schützenfest mit Festumzug, Königsschießen, Festzelt und Jahrmarkt.",
     category: "Tradition",
   },
   {
+    title: "See- und Kinderfest Lauenstein",
+    date: "2026-07-12",
+    location: "Naturerlebnisbad Lauenstein, Salzhemmendorf",
+    description: "Familienfest am Naturbad mit Kinderprogramm, Zaubershows und Unterhaltung.",
+    category: "Familie",
+  },
+  {
+    title: "Schützenfest Coppenbrügge",
+    date: "2026-07-18",
+    location: "Coppenbrügge",
+    description: "Mehrtägiges Schützenfest des Schützenvereins Coppenbrügge von 1848 e.V. mit Umzug, Musik, Tanz und Königsschießen.",
+    category: "Tradition",
+  },
+  {
+    title: "Coppenbrügger Ferienprogramm",
+    date: "2026-07-20",
+    dateEnd: "2026-08-28",
+    location: "Coppenbrügge, diverse Orte",
+    description: "Kinder- und Jugendferienprogramm mit Aktivitäten wie Schnorcheln, Segelfliegen, Kochkurse und Wassersport. Buchbar über jugendarbeit-coppenbruegge.de.",
+    category: "Familie",
+  },
+  // --- August ---
+  {
+    title: "3. Coppenbrügger Spectaculum",
+    date: "2026-08-15",
+    dateEnd: "2026-08-16",
+    location: "Burg Coppenbrügge",
+    description: "Mittelalterfest auf der historischen Burganlage mit Ritterkämpfen, Gauklern, Musikern, Händlern und mittelalterlichem Essen. Kinderprogramm und Lagergruppen.",
+    category: "Kultur",
+  },
+  {
+    title: "Große Weserrunde – Radmarathon",
+    date: "2026-08-22",
+    location: "Start/Ziel Rinteln, Weserbergland",
+    description: "Radmarathon entlang der Weser mit Strecken von 80 bis 350 km. Teil des Radmarathon-Cup Deutschland.",
+    category: "Sport",
+  },
+  // --- September ---
+  {
+    title: "7. Ith-Hils-Wandertag",
+    date: "2026-09-06",
+    location: "Sechs Gemeinden am Ith-Hils-Weg",
+    description: "Sechs kostenlose, geführte Wandertouren (5,7 bis 10 km) rund um den Ith-Hils-Weg. Gemeinsames Wandererlebnis mit Natur, Geschichte und Gemeinschaft.",
+    category: "Wandern",
+  },
+  // --- Oktober ---
+  {
+    title: "Erntedankfest",
+    date: "2026-10-04",
+    location: "Kirchen und Dorfgemeinschaften",
+    description: "Traditionelles Erntedankfest mit Gottesdiensten, geschmückten Kirchen und Erntekronen. In vielen Ortsteilen mit Ernteumzügen und Dorffesten.",
+    category: "Tradition",
+  },
+  {
+    title: "Rasti-Land Halloween-Wochen",
+    date: "2026-10-27",
+    dateEnd: "2026-11-04",
+    location: "Rasti-Land, Salzhemmendorf",
+    description: "Grusel-Sonderprogramm mit tausenden Kürbissen, täglicher Halloween-Parade, Zombie-Zone und Indoor-Scare-Maze. Saisonabschluss des Freizeitparks.",
+    category: "Familie",
+  },
+  // --- Dezember ---
+  {
     title: "Adventsmarkt Salzhemmendorf",
     date: "2026-12-05",
-    location: "Ortsmitte Salzhemmendorf",
-    description: "Weihnachtliche Stimmung mit Glühwein, Handwerk und Leckereien.",
+    location: "Kirchplatz Salzhemmendorf",
+    description: "Weihnachtlicher Adventsmarkt rund um die Kirche mit Budenverkauf, Glühwein, Gebäck und festlicher Stimmung.",
+    category: "Markt",
+    time: "ab 16:00 Uhr",
+  },
+  {
+    title: "Weihnachtszauber auf Burg Coppenbrügge",
+    date: "2026-12-05",
+    dateEnd: "2026-12-06",
+    location: "Burg Coppenbrügge",
+    description: "Weihnachtsmarkt in der historischen Burganlage mit Kunsthandwerk, Budenzauber und festlicher Atmosphäre. Sa 14–21 Uhr, So 12–18 Uhr.",
     category: "Markt",
   },
+  {
+    title: "Weihnachtsmarkt Mosterei Ockensen",
+    date: "2026-12-12",
+    dateEnd: "2026-12-20",
+    location: "Hof der Mosterei, Ockensen",
+    description: "Stimmungsvoller Weihnachtsmarkt auf dem Hof der historischen Mosterei. Regionale Produkte und Handwerk. Sa 14–19 Uhr, So 11–18 Uhr.",
+    category: "Markt",
+  },
+];
+
+// Regelmäßige Veranstaltungen
+const recurring: Event[] = [
+  {
+    title: "Wochenmarkt Salzhemmendorf",
+    date: "2026-01-07",
+    location: "Am Rathaus, Salzhemmendorf",
+    description: "Jeden Mittwoch 8–13 Uhr. Ca. 15 regionale Händler mit Obst, Käse, Fleisch, Fisch, Brot und mehr.",
+    category: "Markt",
+    time: "08:00–13:00 Uhr",
+    recurring: true,
+  },
+  {
+    title: "Lange Saunanacht – Ith-Sole-Therme",
+    date: "2026-01-01",
+    location: "Ith-Sole-Therme, Salzhemmendorf",
+    description: "Abend-Event mit speziellen Sauna-Aufgüssen und verlängerten Öffnungszeiten. Mehrmals jährlich, samstags ab 18 Uhr.",
+    category: "Kultur",
+    time: "ab 18:00 Uhr",
+    recurring: true,
+  },
+];
+
+// Verkaufsoffene Sonntage in der Umgebung
+interface ShoppingSunday {
+  date: string;
+  city: string;
+  distance: string;
+  occasion: string;
+  hours: string;
+}
+
+const shoppingSundays: ShoppingSunday[] = [
+  { date: "2026-03-08", city: "Hameln", distance: "25 km", occasion: "Mystica Hamelon – Mittelalter-Festival", hours: "13–18 Uhr" },
+  { date: "2026-03-22", city: "Bad Pyrmont", distance: "20 km", occasion: "Frühlings- und Ostermarkt", hours: "13–18 Uhr" },
+  { date: "2026-03-22", city: "Holzminden", distance: "30 km", occasion: "49. Kükenfest", hours: "12–17 Uhr" },
+  { date: "2026-04-12", city: "Bad Münder", distance: "15 km", occasion: "Mittelaltermarkt", hours: "12–18 Uhr" },
+  { date: "2026-04-26", city: "Alfeld/Leine", distance: "20 km", occasion: "Frühlingsmarkt mit Autoschau", hours: "13–18 Uhr" },
+  { date: "2026-05-10", city: "Hannover", distance: "50 km", occasion: "Blaulichtmeile", hours: "13–18 Uhr" },
+  { date: "2026-05-17", city: "Hameln", distance: "25 km", occasion: "Maifest", hours: "13–18 Uhr" },
+  { date: "2026-09-06", city: "Hannover", distance: "50 km", occasion: "Regionsentdeckertag", hours: "13–18 Uhr" },
+  { date: "2026-09-27", city: "Hannover", distance: "50 km", occasion: "Der Große Preis von Hainholz", hours: "13–18 Uhr" },
+  { date: "2026-10-04", city: "Hameln", distance: "25 km", occasion: "Herbstmarkt", hours: "13–18 Uhr" },
+  { date: "2026-11-08", city: "Hannover", distance: "50 km", occasion: "Hannover hilft! – St. Martin", hours: "13–18 Uhr" },
 ];
 
 function formatDate(dateStr: string): string {
@@ -56,66 +221,215 @@ function formatDate(dateStr: string): string {
   });
 }
 
+function formatShort(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+  });
+}
+
 const categoryColors: Record<string, string> = {
   Tradition: "bg-ith-green text-white",
   Markt: "bg-ith-teal text-white",
   Wandern: "bg-ith-blue text-white",
   Fest: "bg-ith-red text-white",
+  Kultur: "bg-purple-600 text-white",
+  Sport: "bg-orange-500 text-white",
+  Familie: "bg-amber-500 text-white",
+  Shopping: "bg-pink-500 text-white",
 };
+
+// Group events by quarter
+const q1 = events.filter(e => { const m = new Date(e.date).getMonth(); return m < 3; });
+const q2 = events.filter(e => { const m = new Date(e.date).getMonth(); return m >= 3 && m < 6; });
+const q3 = events.filter(e => { const m = new Date(e.date).getMonth(); return m >= 6 && m < 9; });
+const q4 = events.filter(e => { const m = new Date(e.date).getMonth(); return m >= 9; });
+
+const quarters = [
+  { label: "Januar – März", events: q1 },
+  { label: "April – Juni", events: q2 },
+  { label: "Juli – September", events: q3 },
+  { label: "Oktober – Dezember", events: q4 },
+];
 ---
 
-<BaseLayout title="Veranstaltungen" description="Veranstaltungen in der Ith-Region: Märkte, Feste, Wandertage und kulturelle Events.">
+<BaseLayout title="Veranstaltungen" description="Veranstaltungen in der Ith-Region 2026: Feste, Märkte, Wandertage, Kultur und verkaufsoffene Sonntage in der Umgebung.">
   <Hero
-    title="Veranstaltungen"
-    subtitle="Märkte, Feste, Wandertage und kulturelle Highlights das ganze Jahr über."
+    title="Veranstaltungen 2026"
+    subtitle="Feste, Märkte, Wandertage, Kultur und Sport – das ganze Jahr über in der Ith-Region."
     imageSrc="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&h=800&fit=crop"
     imageAlt="Festliche Veranstaltung im Freien"
     size="medium"
   />
 
-  <section class="section-padding bg-sand">
+  <!-- Quick Navigation -->
+  <nav class="bg-white border-b border-gray-200 sticky top-20 z-40" aria-label="Veranstaltungs-Navigation">
+    <div class="container mx-auto px-4 flex gap-2 overflow-x-auto py-3 text-sm">
+      <a href="#events" class="px-4 py-2 rounded-full bg-ith-blue text-white no-underline whitespace-nowrap min-h-[44px] inline-flex items-center">Alle Events</a>
+      <a href="#regelmaessig" class="px-4 py-2 rounded-full border border-gray-300 text-anthracite no-underline whitespace-nowrap hover:bg-ith-blue-light min-h-[44px] inline-flex items-center">Regelmäßig</a>
+      <a href="#shopping" class="px-4 py-2 rounded-full border border-gray-300 text-anthracite no-underline whitespace-nowrap hover:bg-ith-blue-light min-h-[44px] inline-flex items-center">Verkaufsoffene Sonntage</a>
+    </div>
+  </nav>
+
+  <!-- Main Events -->
+  <section id="events" class="section-padding bg-sand" aria-labelledby="events-heading">
     <div class="container mx-auto max-w-4xl">
-      <div class="space-y-6">
-        {events.map((event) => (
-          <article class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
-              <div class="sm:w-24 shrink-0 text-center">
-                <span class="block text-3xl font-extrabold text-ith-blue">
-                  {new Date(event.date).getDate()}
-                </span>
-                <span class="block text-sm text-anthracite-light">
-                  {new Date(event.date).toLocaleDateString("de-DE", { month: "short", year: "numeric" })}
-                </span>
-              </div>
-              <div class="flex-1">
-                <div class="flex flex-wrap items-center gap-3 mb-2">
-                  <h3 class="text-lg font-semibold text-ith-blue-dark">{event.title}</h3>
-                  <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColors[event.category] ?? "bg-gray-200 text-gray-700"}`}>
-                    {event.category}
-                  </span>
+      <h2 id="events-heading" class="text-3xl font-extrabold mb-2">Veranstaltungen in der Ith-Region</h2>
+      <p class="text-anthracite-light mb-10">20 Events von traditionellen Festen bis zu sportlichen Highlights.</p>
+
+      {quarters.map((q) => q.events.length > 0 && (
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-ith-blue-dark mb-4 pb-2 border-b-2 border-ith-teal">{q.label}</h3>
+          <div class="space-y-4">
+            {q.events.map((event) => (
+              <article class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                  <div class="sm:w-20 shrink-0 text-center" aria-hidden="true">
+                    <span class="block text-2xl font-extrabold text-ith-blue">
+                      {new Date(event.date).getDate()}
+                    </span>
+                    <span class="block text-xs text-anthracite-light uppercase">
+                      {new Date(event.date).toLocaleDateString("de-DE", { month: "short" })}
+                    </span>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                      <h4 class="text-base font-semibold text-ith-blue-dark">{event.title}</h4>
+                      <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColors[event.category] ?? "bg-gray-200 text-gray-700"}`}>
+                        {event.category}
+                      </span>
+                    </div>
+                    <p class="text-sm text-anthracite-light mb-2">{event.description}</p>
+                    <div class="flex flex-wrap items-center gap-3 text-xs text-anthracite-light">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {event.location}
+                      </span>
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <time datetime={event.date}>
+                          {event.dateEnd
+                            ? `${formatShort(event.date)}–${formatShort(event.dateEnd)}`
+                            : formatDate(event.date)}
+                        </time>
+                      </span>
+                      {event.time && (
+                        <span class="flex items-center gap-1">
+                          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {event.time}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <p class="text-sm text-anthracite-light mb-2">{event.description}</p>
-                <div class="flex items-center gap-1 text-xs text-anthracite-light">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span>{event.location}</span>
-                  <span class="mx-2">|</span>
-                  <span>{formatDate(event.date)}</span>
-                </div>
-              </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Recurring Events -->
+  <section id="regelmaessig" class="section-padding bg-white" aria-labelledby="recurring-heading">
+    <div class="container mx-auto max-w-4xl">
+      <h2 id="recurring-heading" class="text-3xl font-extrabold mb-2">Regelmäßige Veranstaltungen</h2>
+      <p class="text-anthracite-light mb-8">Wiederkehrende Events und Angebote das ganze Jahr über.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {recurring.map((event) => (
+          <article class="bg-sand rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-base font-semibold text-ith-blue-dark">{event.title}</h3>
+              <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColors[event.category] ?? "bg-gray-200 text-gray-700"}`}>
+                {event.category}
+              </span>
+            </div>
+            <p class="text-sm text-anthracite-light mb-2">{event.description}</p>
+            <div class="flex items-center gap-1 text-xs text-anthracite-light">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>{event.location}</span>
+              {event.time && (
+                <>
+                  <span class="mx-1">|</span>
+                  <span>{event.time}</span>
+                </>
+              )}
             </div>
           </article>
         ))}
       </div>
+    </div>
+  </section>
 
-      <div class="text-center mt-12">
-        <p class="text-anthracite-light text-sm">
-          Veranstaltung melden? Kontaktieren Sie uns unter
-          <a href="mailto:tourismus@salzhemmendorf.de" class="text-ith-blue">tourismus@salzhemmendorf.de</a>
+  <!-- Shopping Sundays -->
+  <section id="shopping" class="section-padding bg-sand" aria-labelledby="shopping-heading">
+    <div class="container mx-auto max-w-4xl">
+      <h2 id="shopping-heading" class="text-3xl font-extrabold mb-2">Verkaufsoffene Sonntage in der Umgebung</h2>
+      <p class="text-anthracite-light mb-8">
+        Einkaufen am Sonntag in den Städten rund um die Ith-Region. Alle Angaben ohne Gewähr.
+      </p>
+
+      <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm" role="table">
+            <thead>
+              <tr class="bg-ith-blue-dark text-white">
+                <th scope="col" class="px-4 py-3 text-left font-semibold">Datum</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold">Stadt</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold hidden sm:table-cell">Entfernung</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold">Anlass</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold hidden md:table-cell">Öffnungszeiten</th>
+              </tr>
+            </thead>
+            <tbody>
+              {shoppingSundays.map((s, i) => (
+                <tr class={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                  <td class="px-4 py-3 whitespace-nowrap">
+                    <time datetime={s.date}>
+                      {new Date(s.date).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" })}
+                    </time>
+                  </td>
+                  <td class="px-4 py-3 font-medium">{s.city}</td>
+                  <td class="px-4 py-3 text-anthracite-light hidden sm:table-cell">{s.distance}</td>
+                  <td class="px-4 py-3">{s.occasion}</td>
+                  <td class="px-4 py-3 text-anthracite-light hidden md:table-cell">{s.hours}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-ith-blue-light rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-ith-blue-dark mb-2">Hinweis</h3>
+        <p class="text-sm text-anthracite">
+          In Niedersachsen sind max. 4 verkaufsoffene Sonntage pro Ortsbereich erlaubt (Öffnungszeiten: 6 Stunden zwischen 12 und 18 Uhr).
+          <strong>Bad Pyrmont</strong> hat als Kurort eine Sonderregelung mit bis zu 40 Sonntagen pro Jahr.
+          Termine können sich ändern – bitte vor der Anreise beim jeweiligen Veranstalter prüfen.
         </p>
       </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+      <h2 class="text-2xl font-extrabold mb-4">Veranstaltung melden</h2>
+      <p class="text-anthracite-light mb-6">
+        Sie planen eine Veranstaltung in der Ith-Region? Melden Sie sie uns und wir nehmen sie in unseren Kalender auf.
+      </p>
+      <a href="/kontakt/" class="btn-primary">Veranstaltung melden</a>
     </div>
   </section>
 </BaseLayout>
