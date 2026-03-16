@@ -47,6 +47,7 @@ function isActive(href: string): boolean {
 <header
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
   id="main-header"
+  role="banner"
 >
   <div class="container mx-auto px-4 lg:px-6">
     <div class="flex items-center justify-between h-20">
@@ -54,71 +55,95 @@ function isActive(href: string): boolean {
       <a href="/" class="flex items-center gap-3 no-underline shrink-0">
         <img
           src="/images/logo-ith-region.svg"
-          alt="Ith-Region Logo"
+          alt="Ith-Region – Zur Startseite"
           class="h-12 w-auto"
           width="200"
           height="60"
         />
         <div class="hidden sm:block">
-          <span class="block text-lg font-bold text-ith-blue-dark leading-tight"
-            >Ith-Region</span
-          >
-          <span class="block text-xs text-anthracite-light"
-            >Jeder Weg ist dein Erlebnis</span
-          >
+          <span class="block text-lg font-bold text-ith-blue-dark leading-tight">Ith-Region</span>
+          <span class="block text-xs text-anthracite-light">Jeder Weg ist dein Erlebnis</span>
         </div>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center gap-1" aria-label="Hauptnavigation">
         {
-          navItems.map((item) => (
-            <div class="relative group">
-              <a
-                href={item.href}
-                class:list={[
-                  "px-3 py-2 text-sm font-medium rounded-lg no-underline transition-colors",
-                  isActive(item.href)
-                    ? "text-ith-blue bg-ith-blue-light"
-                    : "text-anthracite hover:text-ith-blue hover:bg-ith-blue-light/50",
-                ]}
-              >
-                {item.label}
-                {item.children && (
-                  <svg
-                    class="inline-block w-3 h-3 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+          navItems.map((item, index) => (
+            <div class="relative" data-dropdown={item.children ? "true" : undefined}>
+              {item.children ? (
+                <>
+                  <button
+                    type="button"
+                    class:list={[
+                      "nav-dropdown-trigger px-3 py-2 text-sm font-medium rounded-lg no-underline transition-colors inline-flex items-center gap-1 min-h-[44px]",
+                      isActive(item.href)
+                        ? "text-ith-blue bg-ith-blue-light"
+                        : "text-anthracite hover:text-ith-blue hover:bg-ith-blue-light/50",
+                    ]}
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    aria-controls={`dropdown-${index}`}
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                )}
-              </a>
-              {item.children && (
-                <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200">
-                  <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[200px]">
-                    {item.children.map((child) => (
+                    {item.label}
+                    <svg
+                      class="w-3 h-3 transition-transform dropdown-chevron"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div
+                    id={`dropdown-${index}`}
+                    class="absolute top-full left-0 pt-2 opacity-0 invisible transition-all duration-200 dropdown-panel"
+                    role="menu"
+                    aria-label={`${item.label} Untermenü`}
+                  >
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[200px]">
                       <a
-                        href={child.href}
+                        href={item.href}
+                        role="menuitem"
                         class:list={[
-                          "block px-4 py-2 text-sm no-underline transition-colors",
-                          isActive(child.href)
+                          "block px-4 py-2.5 text-sm no-underline transition-colors font-medium border-b border-gray-100 min-h-[44px] flex items-center",
+                          isActive(item.href)
                             ? "text-ith-blue bg-ith-blue-light"
                             : "text-anthracite hover:text-ith-blue hover:bg-ith-blue-light/50",
                         ]}
                       >
-                        {child.label}
+                        Alle {item.label}
                       </a>
-                    ))}
+                      {item.children.map((child) => (
+                        <a
+                          href={child.href}
+                          role="menuitem"
+                          class:list={[
+                            "block px-4 py-2.5 text-sm no-underline transition-colors min-h-[44px] flex items-center",
+                            isActive(child.href)
+                              ? "text-ith-blue bg-ith-blue-light"
+                              : "text-anthracite hover:text-ith-blue hover:bg-ith-blue-light/50",
+                          ]}
+                        >
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </>
+              ) : (
+                <a
+                  href={item.href}
+                  class:list={[
+                    "px-3 py-2 text-sm font-medium rounded-lg no-underline transition-colors min-h-[44px] inline-flex items-center",
+                    isActive(item.href)
+                      ? "text-ith-blue bg-ith-blue-light"
+                      : "text-anthracite hover:text-ith-blue hover:bg-ith-blue-light/50",
+                  ]}
+                >
+                  {item.label}
+                </a>
               )}
             </div>
           ))
@@ -127,43 +152,24 @@ function isActive(href: string): boolean {
 
       <!-- Mobile Menu Button -->
       <button
-        class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
         id="mobile-menu-btn"
         aria-label="Menü öffnen"
         aria-expanded="false"
+        aria-controls="mobile-menu"
       >
-        <svg
-          class="w-6 h-6 text-anthracite"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          id="menu-icon"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
+        <svg class="w-6 h-6 text-anthracite" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="menu-icon" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg
-          class="w-6 h-6 text-anthracite hidden"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          id="close-icon"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
+        <svg class="w-6 h-6 text-anthracite hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="close-icon" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div class="lg:hidden hidden bg-white border-t border-gray-100 shadow-lg" id="mobile-menu">
+  <div class="lg:hidden hidden bg-white border-t border-gray-100 shadow-lg" id="mobile-menu" role="dialog" aria-label="Navigation">
     <nav class="container mx-auto px-4 py-4 space-y-1" aria-label="Mobile Navigation">
       {
         navItems.map((item) => (
@@ -171,7 +177,7 @@ function isActive(href: string): boolean {
             <a
               href={item.href}
               class:list={[
-                "block px-4 py-3 rounded-lg text-sm font-medium no-underline transition-colors",
+                "block px-4 py-3 rounded-lg text-sm font-medium no-underline transition-colors min-h-[44px] flex items-center",
                 isActive(item.href)
                   ? "text-ith-blue bg-ith-blue-light"
                   : "text-anthracite hover:text-ith-blue hover:bg-ith-blue-light/50",
@@ -183,7 +189,7 @@ function isActive(href: string): boolean {
               <a
                 href={child.href}
                 class:list={[
-                  "block px-8 py-2 rounded-lg text-sm no-underline transition-colors",
+                  "block px-8 py-2.5 rounded-lg text-sm no-underline transition-colors min-h-[44px] flex items-center",
                   isActive(child.href)
                     ? "text-ith-blue bg-ith-blue-light"
                     : "text-anthracite-light hover:text-ith-blue hover:bg-ith-blue-light/50",
@@ -220,12 +226,120 @@ function isActive(href: string): boolean {
   window.addEventListener("scroll", updateHeader, { passive: true });
   updateHeader();
 
-  // Mobile menu toggle
+  // === Mobile Menu ===
+  function openMobileMenu() {
+    mobileMenu?.classList.remove("hidden");
+    menuIcon?.classList.add("hidden");
+    closeIcon?.classList.remove("hidden");
+    mobileMenuBtn?.setAttribute("aria-expanded", "true");
+    mobileMenuBtn?.setAttribute("aria-label", "Menü schließen");
+    // Focus first link in menu
+    const firstLink = mobileMenu?.querySelector("a") as HTMLElement | null;
+    firstLink?.focus();
+  }
+
+  function closeMobileMenu() {
+    mobileMenu?.classList.add("hidden");
+    menuIcon?.classList.remove("hidden");
+    closeIcon?.classList.add("hidden");
+    mobileMenuBtn?.setAttribute("aria-expanded", "false");
+    mobileMenuBtn?.setAttribute("aria-label", "Menü öffnen");
+    mobileMenuBtn?.focus();
+  }
+
   mobileMenuBtn?.addEventListener("click", () => {
     const isOpen = mobileMenu?.classList.contains("hidden") === false;
-    mobileMenu?.classList.toggle("hidden");
-    menuIcon?.classList.toggle("hidden");
-    closeIcon?.classList.toggle("hidden");
-    mobileMenuBtn.setAttribute("aria-expanded", String(!isOpen));
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  // Escape key closes mobile menu
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu && !mobileMenu.classList.contains("hidden")) {
+      closeMobileMenu();
+    }
+  });
+
+  // Focus trap in mobile menu
+  mobileMenu?.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const focusable = mobileMenu.querySelectorAll<HTMLElement>("a, button");
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // === Desktop Dropdowns ===
+  const dropdownTriggers = document.querySelectorAll<HTMLButtonElement>(".nav-dropdown-trigger");
+
+  dropdownTriggers.forEach((trigger) => {
+    const panel = trigger.nextElementSibling as HTMLElement | null;
+    if (!panel) return;
+
+    function openDropdown() {
+      trigger.setAttribute("aria-expanded", "true");
+      panel!.classList.remove("opacity-0", "invisible");
+      panel!.classList.add("opacity-100", "visible");
+      trigger.querySelector(".dropdown-chevron")?.classList.add("rotate-180");
+    }
+
+    function closeDropdown() {
+      trigger.setAttribute("aria-expanded", "false");
+      panel!.classList.remove("opacity-100", "visible");
+      panel!.classList.add("opacity-0", "invisible");
+      trigger.querySelector(".dropdown-chevron")?.classList.remove("rotate-180");
+    }
+
+    // Click toggle
+    trigger.addEventListener("click", () => {
+      const isOpen = trigger.getAttribute("aria-expanded") === "true";
+      // Close all other dropdowns first
+      dropdownTriggers.forEach((other) => {
+        if (other !== trigger) {
+          other.setAttribute("aria-expanded", "false");
+          const otherPanel = other.nextElementSibling as HTMLElement;
+          otherPanel?.classList.remove("opacity-100", "visible");
+          otherPanel?.classList.add("opacity-0", "invisible");
+          other.querySelector(".dropdown-chevron")?.classList.remove("rotate-180");
+        }
+      });
+      if (isOpen) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
+    });
+
+    // Hover open/close
+    const parent = trigger.parentElement;
+    parent?.addEventListener("mouseenter", openDropdown);
+    parent?.addEventListener("mouseleave", closeDropdown);
+
+    // Keyboard: Escape closes
+    parent?.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeDropdown();
+        trigger.focus();
+      }
+    });
+
+    // Close when focus leaves the dropdown group
+    parent?.addEventListener("focusout", (e) => {
+      const relatedTarget = (e as FocusEvent).relatedTarget as HTMLElement | null;
+      if (relatedTarget && !parent.contains(relatedTarget)) {
+        closeDropdown();
+      }
+    });
   });
 </script>

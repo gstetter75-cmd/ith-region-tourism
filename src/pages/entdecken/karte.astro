@@ -11,12 +11,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         in der Ith-Region.
       </p>
       <!-- Filter Buttons -->
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button class="filter-btn active px-3 py-1.5 text-sm rounded-full border border-gray-300 bg-ith-blue text-white" data-filter="all">Alle</button>
-        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="sehenswuerdigkeit">Sehenswürdigkeiten</button>
-        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="parkplatz">Parkplätze</button>
-        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="gastronomie">Gastronomie</button>
-        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="freizeit">Freizeit</button>
+      <div class="flex flex-wrap gap-2 mb-6" role="group" aria-label="Kartenfilter">
+        <button class="filter-btn active px-4 py-2 text-sm rounded-full border border-gray-300 bg-ith-blue text-white min-h-[44px]" data-filter="all" aria-pressed="true">Alle</button>
+        <button class="filter-btn px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light min-h-[44px]" data-filter="sehenswuerdigkeit" aria-pressed="false">Sehenswürdigkeiten</button>
+        <button class="filter-btn px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light min-h-[44px]" data-filter="parkplatz" aria-pressed="false">Parkplätze</button>
+        <button class="filter-btn px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light min-h-[44px]" data-filter="gastronomie" aria-pressed="false">Gastronomie</button>
+        <button class="filter-btn px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light min-h-[44px]" data-filter="freizeit" aria-pressed="false">Freizeit</button>
       </div>
     </div>
   </section>
@@ -181,8 +181,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
         document.querySelectorAll(".filter-btn").forEach((b) => {
           b.classList.remove("active", "bg-ith-blue", "text-white");
+          b.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("active", "bg-ith-blue", "text-white");
+        btn.setAttribute("aria-pressed", "true");
 
         if (filter === "all") {
           Object.values(layerGroups).forEach((lg) => lg.addTo(map));

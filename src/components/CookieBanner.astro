@@ -6,10 +6,11 @@
   class="fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-gray-200 shadow-2xl p-4 sm:p-6 hidden"
   role="dialog"
   aria-label="Cookie-Hinweis"
+  aria-modal="true"
 >
   <div class="container mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
     <div class="flex-1">
-      <p class="text-sm text-anthracite">
+      <p class="text-sm text-anthracite" id="cookie-desc">
         Wir verwenden nur technisch notwendige Cookies, um Ihnen die beste
         Erfahrung auf unserer Website zu bieten. Weitere Informationen finden Sie
         in unserer
@@ -19,7 +20,8 @@
     <div class="flex gap-3 shrink-0">
       <button
         id="cookie-accept"
-        class="btn-primary text-sm py-2 px-4"
+        class="btn-primary text-sm py-2 px-4 min-h-[44px]"
+        aria-describedby="cookie-desc"
       >
         Verstanden
       </button>
@@ -33,10 +35,30 @@
 
   if (!localStorage.getItem("ith-cookies-accepted")) {
     banner?.classList.remove("hidden");
+    // Focus the accept button when banner appears
+    requestAnimationFrame(() => acceptBtn?.focus());
   }
 
   acceptBtn?.addEventListener("click", () => {
     localStorage.setItem("ith-cookies-accepted", "true");
     banner?.classList.add("hidden");
+  });
+
+  // Focus trap within cookie banner
+  banner?.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") {
+      const focusable = banner.querySelectorAll<HTMLElement>("a, button");
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 </script>

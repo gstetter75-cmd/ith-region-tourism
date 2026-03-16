@@ -99,7 +99,8 @@ const highlights = [
   />
 
   <!-- Highlights Bar -->
-  <section class="bg-ith-blue-dark text-white py-8">
+  <section class="bg-ith-blue-dark text-white py-8" aria-labelledby="highlights-heading">
+    <h2 id="highlights-heading" class="sr-only">Highlights der Ith-Region</h2>
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {
@@ -108,7 +109,7 @@ const highlights = [
               <span class="text-3xl" aria-hidden="true">{h.icon}</span>
               <div>
                 <h3 class="text-white font-semibold text-sm">{h.title}</h3>
-                <p class="text-blue-200 text-xs mt-1">{h.text}</p>
+                <p class="text-blue-100 text-xs mt-1">{h.text}</p>
               </div>
             </div>
           ))

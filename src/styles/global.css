@@ -79,9 +79,25 @@
     color: var(--color-ith-teal);
   }
 
+  /* Focus visible styles (WCAG 2.4.7) */
+  :focus-visible {
+    outline: 3px solid var(--color-ith-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
   img {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Reduced motion: disable all transitions/animations */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -105,6 +121,10 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(1, 116, 195, 0.3);
   }
+  .btn-primary:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+  }
 
   .btn-secondary {
     display: inline-flex;
@@ -121,6 +141,10 @@
   .btn-secondary:hover {
     background-color: var(--color-ith-blue);
     color: white;
+  }
+  .btn-secondary:focus-visible {
+    outline: 3px solid var(--color-ith-blue);
+    outline-offset: 2px;
   }
 
   .section-padding {
