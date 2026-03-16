@@ -1,0 +1,19 @@
+---
+import QRLayout from "../../layouts/QRLayout.astro";
+---
+
+<QRLayout
+  title="Ith-Sole-Therme"
+  description="Wellness und Badevergnügen mit Deutschlands zweitbester Schwefelsole. 9 Innen-/Außenbecken und 4 Saunen – Erholung pur im Weserbergland."
+  locationName="Salzhemmendorf"
+  locationIcon="♨️"
+  coordinates={{ lat: 52.075, lng: 9.575 }}
+  links={[
+    { label: "Öffnungszeiten & Preise", href: "https://ther.me/", icon: "🕐", external: true },
+    { label: "Lange Saunanächte", href: "/veranstaltungen/", icon: "🌙" },
+    { label: "Weitere Erlebnisse in der Region", href: "/erleben/", icon: "🌿" },
+    { label: "Unterkünfte in der Nähe", href: "/planen/unterkuenfte/", icon: "🛏️" },
+    { label: "Gastronomie", href: "/planen/gastronomie/", icon: "🍽️" },
+    { label: "Anreise & Parken", href: "/planen/anreise/", icon: "🚗" },
+  ]}
+/>

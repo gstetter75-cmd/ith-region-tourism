@@ -1,0 +1,19 @@
+---
+import QRLayout from "../../layouts/QRLayout.astro";
+---
+
+<QRLayout
+  title="Wanderparkplatz am Ith"
+  description="Von hier aus starten zahlreiche Wanderungen und Klettertouren. Der Ith-Hils-Weg (Etappe 7) führt von Salzhemmendorf nach Coppenbrügge – 10 km, ca. 3 Stunden."
+  locationName="Wanderparkplatz Ith"
+  locationIcon="🅿️"
+  coordinates={{ lat: 52.075, lng: 9.57 }}
+  links={[
+    { label: "Ith-Hils-Weg Etappe 7 (10 km)", href: "/erleben/wandern/", icon: "🥾" },
+    { label: "GPS-Track herunterladen", href: "/gpx/ith-hils-weg-etappe7.gpx", icon: "📱" },
+    { label: "Klettergebiete am Ith", href: "/erleben/klettern/", icon: "🧗" },
+    { label: "Natur & Foto-Spots", href: "/erleben/natur/", icon: "📸" },
+    { label: "Alle Parkplätze auf der Karte", href: "/entdecken/karte/", icon: "🗺️" },
+    { label: "Notruf: 112", href: "tel:112", icon: "🚨" },
+  ]}
+/>

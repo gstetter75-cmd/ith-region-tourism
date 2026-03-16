@@ -1,0 +1,20 @@
+---
+import QRLayout from "../../layouts/QRLayout.astro";
+---
+
+<QRLayout
+  title="Willkommen in Salzhemmendorf"
+  description="Der Flecken Salzhemmendorf mit 11 Ortsteilen und ca. 10.000 Einwohnern ist das Herz der Ith-Region. Entdecke Natur, Kultur und Gastfreundschaft im Weserbergland."
+  locationName="Salzhemmendorf"
+  locationIcon="🏡"
+  coordinates={{ lat: 52.067, lng: 9.585 }}
+  links={[
+    { label: "Salzhemmendorf entdecken", href: "/entdecken/salzhemmendorf/", icon: "🏘️" },
+    { label: "Wandern & Radfahren", href: "/erleben/", icon: "🥾" },
+    { label: "Veranstaltungen", href: "/veranstaltungen/", icon: "🎉" },
+    { label: "Unterkünfte finden", href: "/planen/unterkuenfte/", icon: "🛏️" },
+    { label: "Gastronomie", href: "/planen/gastronomie/", icon: "🍽️" },
+    { label: "Ith-Sole-Therme", href: "https://ther.me/", icon: "♨️", external: true },
+    { label: "Rasti-Land Freizeitpark", href: "https://www.rasti-land.de/", icon: "🎢", external: true },
+  ]}
+/>

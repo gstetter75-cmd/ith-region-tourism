@@ -1,0 +1,100 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  locationName: string;
+  locationIcon?: string;
+  links: Array<{
+    label: string;
+    href: string;
+    icon?: string;
+    external?: boolean;
+  }>;
+  coordinates?: { lat: number; lng: number };
+  backLink?: string;
+}
+
+const {
+  title,
+  description,
+  locationName,
+  locationIcon = "📍",
+  links,
+  coordinates,
+  backLink = "/entdecken/karte/",
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} | QR-Info`} description={description}>
+  <section class="pt-24 pb-16 min-h-screen bg-gradient-to-b from-ith-blue-light to-white">
+    <div class="container mx-auto px-4 max-w-lg">
+      <!-- Location Header -->
+      <div class="text-center mb-8">
+        <span class="text-5xl mb-4 block" aria-hidden="true">{locationIcon}</span>
+        <h1 class="text-2xl font-extrabold text-ith-blue-dark mb-2">{title}</h1>
+        <p class="text-anthracite-light text-sm flex items-center justify-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {locationName}
+        </p>
+      </div>
+
+      <!-- Description -->
+      {description && (
+        <p class="text-anthracite text-center mb-8 leading-relaxed">{description}</p>
+      )}
+
+      <!-- Content from slot -->
+      <slot />
+
+      <!-- Quick Links -->
+      <div class="space-y-3 mb-8">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow no-underline min-h-[56px]"
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+          >
+            {link.icon && <span class="text-2xl shrink-0" aria-hidden="true">{link.icon}</span>}
+            <span class="flex-1 text-sm font-medium text-anthracite">{link.label}</span>
+            <svg class="w-5 h-5 text-anthracite-light shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={link.external ? "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" : "M9 5l7 7-7 7"} />
+            </svg>
+          </a>
+        ))}
+      </div>
+
+      <!-- Map Link -->
+      {coordinates && (
+        <div class="text-center mb-8">
+          <a
+            href={`https://www.openstreetmap.org/?mlat=${coordinates.lat}&mlon=${coordinates.lng}#map=15/${coordinates.lat}/${coordinates.lng}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary text-sm py-2 px-4"
+          >
+            Navigation starten
+          </a>
+        </div>
+      )}
+
+      <!-- Back to site -->
+      <div class="text-center border-t border-gray-200 pt-6">
+        <a href="/" class="flex items-center justify-center gap-2 no-underline">
+          <img src="/images/logo-ith-region.svg" alt="Ith-Region" class="h-8 w-auto" width="200" height="60" />
+          <span class="text-sm font-semibold text-ith-blue-dark">Ith-Region</span>
+        </a>
+        <p class="text-xs text-anthracite-light mt-2">
+          <a href={backLink} class="text-ith-blue">Interaktive Karte</a> ·
+          <a href="/veranstaltungen/" class="text-ith-blue">Veranstaltungen</a> ·
+          <a href="/kontakt/" class="text-ith-blue">Kontakt</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

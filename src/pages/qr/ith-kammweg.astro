@@ -1,0 +1,19 @@
+---
+import QRLayout from "../../layouts/QRLayout.astro";
+---
+
+<QRLayout
+  title="Ith-Kammweg"
+  description="Du stehst am Ith-Kammweg – einem der schönsten Höhenwege Norddeutschlands. Hier erwarten dich spektakuläre Felsformationen, Aussichtspunkte und der preisgekrönte Ith-Hils-Weg."
+  locationName="Ith-Höhenzug"
+  locationIcon="🏔️"
+  coordinates={{ lat: 52.09, lng: 9.56 }}
+  links={[
+    { label: "Wanderrouten am Ith", href: "/erleben/wandern/", icon: "🥾" },
+    { label: "Klettergebiete am Ith", href: "/erleben/klettern/", icon: "🧗" },
+    { label: "GPS-Track Etappe 7 herunterladen", href: "/gpx/ith-hils-weg-etappe7.gpx", icon: "📱" },
+    { label: "Route auf Komoot ansehen", href: "https://www.komoot.com/de-de/smarttour/37239", icon: "🗺️", external: true },
+    { label: "Interaktive Karte", href: "/entdecken/karte/", icon: "📍" },
+    { label: "Gastronomie in der Nähe", href: "/planen/gastronomie/", icon: "🍽️" },
+  ]}
+/>
