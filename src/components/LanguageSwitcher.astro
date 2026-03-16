@@ -1,0 +1,19 @@
+---
+import { languages, type Lang } from "../i18n/ui";
+import { getLangFromUrl, getLocalizedPath } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const otherLang: Lang = lang === "de" ? "en" : "de";
+const otherPath = getLocalizedPath(currentPath, otherLang);
+---
+
+<a
+  href={otherPath}
+  class="px-2 py-1 text-xs font-medium rounded border border-gray-300 no-underline text-anthracite hover:bg-ith-blue-light transition-colors min-h-[44px] inline-flex items-center gap-1"
+  aria-label={`Sprache wechseln zu ${languages[otherLang]}`}
+  hreflang={otherLang}
+>
+  <span aria-hidden="true">{otherLang === "en" ? "🇬🇧" : "🇩🇪"}</span>
+  <span>{languages[otherLang]}</span>
+</a>

@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Card from "../../components/Card.astro";
+import InstagramFeed from "../../components/InstagramFeed.astro";
+
+const activities = [
+  {
+    title: "Hiking",
+    description: "Discover the award-winning Ith-Hils trail and numerous themed hiking paths through the Weserbergland.",
+    imageSrc: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=450&fit=crop",
+    imageAlt: "Hiker on a forest trail",
+    href: "/en/experience/hiking/",
+    tag: "Quality Trail",
+  },
+  {
+    title: "Cycling",
+    description: "Explore the gentle hills of the Ith-Region on well-maintained cycle paths.",
+    imageSrc: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&h=450&fit=crop",
+    imageAlt: "Cyclist on a nature path",
+    href: "/en/experience/cycling/",
+    tag: "Cycle Tours",
+  },
+  {
+    title: "Climbing",
+    description: "The Ith offers spectacular rock formations and is one of Northern Germany's most popular climbing areas.",
+    imageSrc: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600&h=450&fit=crop",
+    imageAlt: "Climber on a rock face",
+    href: "/en/experience/climbing/",
+    tag: "Climbing Area",
+  },
+  {
+    title: "Nature & Photo Spots",
+    description: "Viewpoints, sunset spots and bizarre rock formations await you.",
+    imageSrc: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=450&fit=crop",
+    imageAlt: "Panoramic view over forested hills",
+    href: "/en/experience/nature/",
+    tag: "Photo Spots",
+  },
+  {
+    title: "Culture & History",
+    description: "Historic town centres, traditional crafts and a vibrant community life.",
+    imageSrc: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=600&h=450&fit=crop",
+    imageAlt: "Historic half-timbered house",
+    href: "/en/experience/culture/",
+    tag: "Culture",
+  },
+  {
+    title: "Families",
+    description: "Rasti-Land theme park, adventure trails, playgrounds and animal encounters for the whole family.",
+    imageSrc: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=450&fit=crop",
+    imageAlt: "Family on a nature walk",
+    href: "/en/experience/families/",
+    tag: "Family-Friendly",
+  },
+];
+
+const highlights = [
+  { icon: "🥾", title: "80 km Quality Trail", text: "Ith-Hils Trail – certified quality hiking path" },
+  { icon: "🧗", title: "Top Climbing Area", text: "Spectacular rock formations with marked climbing routes" },
+  { icon: "🏡", title: "11+ Villages", text: "Charm and hospitality in two historic towns" },
+  { icon: "♨️", title: "Ith-Sole Spa", text: "Relaxation and wellness in the Weserbergland" },
+];
+---
+
+<BaseLayout title="Home" description="Discover the Ith-Region in the Weserbergland – hiking, climbing, cycling and pure nature in Salzhemmendorf & Coppenbrügge.">
+  <Hero
+    title="Every Path is Your Adventure"
+    subtitle="Discover the Ith-Region in the Weserbergland – hiking, climbing, cycling and pure nature in Salzhemmendorf & Coppenbrügge."
+    imageSrc="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop"
+    imageAlt="Panoramic view of the Ith ridge in the Weserbergland"
+    ctaText="Discover the region"
+    ctaHref="/en/discover/"
+    ctaSecondaryText="View activities"
+    ctaSecondaryHref="/en/experience/"
+    size="full"
+  />
+
+  <section class="bg-ith-blue-dark text-white py-8" aria-labelledby="highlights-heading-en">
+    <h2 id="highlights-heading-en" class="sr-only">Highlights of the Ith-Region</h2>
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {highlights.map((h) => (
+          <div class="flex items-start gap-4">
+            <span class="text-3xl" aria-hidden="true">{h.icon}</span>
+            <div>
+              <h3 class="text-white font-semibold text-sm">{h.title}</h3>
+              <p class="text-blue-100 text-xs mt-1">{h.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">What would you like to experience?</h2>
+        <p class="text-anthracite-light text-lg max-w-2xl mx-auto">
+          The Ith-Region offers the perfect experience for everyone – whether sporty, nature-loving or culturally curious.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {activities.map((activity) => <Card {...activity} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-ith-teal font-semibold text-sm uppercase tracking-wider mb-3">About the Region</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mb-6">Two Towns, One Region</h2>
+          <p class="text-anthracite-light leading-relaxed mb-4">
+            The Ith-Region unites the towns of <strong>Salzhemmendorf</strong> and
+            <strong>Coppenbrügge</strong> into a shared tourism experience in the heart of
+            the Weserbergland. Rural idyll, diverse nature and living traditions make our
+            region a unique retreat.
+          </p>
+          <p class="text-anthracite-light leading-relaxed mb-6">
+            Whether the award-winning Ith-Hils Trail, spectacular climbing routes at the
+            Ith or a relaxing day at the Ith-Sole Spa – here you'll find both relaxation
+            and adventure.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/en/discover/salzhemmendorf/" class="btn-primary">Salzhemmendorf</a>
+            <a href="/en/discover/coppenbruegge/" class="btn-secondary">Coppenbrügge</a>
+          </div>
+        </div>
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&h=500&fit=crop"
+            alt="Weserbergland landscape with green hills"
+            class="rounded-2xl shadow-lg w-full object-cover aspect-[4/3]"
+            loading="lazy"
+            width="700"
+            height="500"
+            decoding="async"
+          />
+          <div class="absolute -bottom-4 -left-4 bg-ith-teal text-white rounded-xl p-4 shadow-lg">
+            <span class="block text-2xl font-extrabold">10,000+</span>
+            <span class="text-sm text-white/80">residents in the region</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-24 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1920&h=600&fit=crop" alt="Hiker at sunset" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-ith-blue-dark/70"></div>
+    <div class="relative z-10 text-center text-white px-4">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Plan Your Visit</h2>
+      <p class="text-lg text-white/80 mb-8 max-w-xl mx-auto">Accommodation, dining and travel information – everything you need for your stay in the Ith-Region.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/en/plan/accommodation/" class="btn-primary bg-white text-ith-blue-dark hover:bg-sand hover:text-ith-blue-dark">Find accommodation</a>
+        <a href="/en/events/" class="btn-secondary border-white text-white hover:bg-white hover:text-ith-blue-dark">Events</a>
+      </div>
+    </div>
+  </section>
+
+  <InstagramFeed title="Follow us on Instagram" />
+</BaseLayout>

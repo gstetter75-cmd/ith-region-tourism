@@ -1,45 +1,51 @@
 ---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
+const prefix = lang === "en" ? "/en" : "";
 
 const navItems = [
-  { label: "Startseite", href: "/" },
+  { label: t("nav.home"), href: `${prefix}/` },
   {
-    label: "Erleben",
-    href: "/erleben/",
+    label: t("nav.experience"),
+    href: `${prefix}${lang === "en" ? "/experience/" : "/erleben/"}`,
     children: [
-      { label: "Wandern", href: "/erleben/wandern/" },
-      { label: "Radfahren", href: "/erleben/radfahren/" },
-      { label: "Klettern", href: "/erleben/klettern/" },
-      { label: "Natur & Foto-Spots", href: "/erleben/natur/" },
-      { label: "Kultur & Geschichte", href: "/erleben/kultur/" },
-      { label: "Familien", href: "/erleben/familien/" },
+      { label: t("nav.hiking"), href: `${prefix}${lang === "en" ? "/experience/hiking/" : "/erleben/wandern/"}` },
+      { label: t("nav.cycling"), href: `${prefix}${lang === "en" ? "/experience/cycling/" : "/erleben/radfahren/"}` },
+      { label: t("nav.climbing"), href: `${prefix}${lang === "en" ? "/experience/climbing/" : "/erleben/klettern/"}` },
+      { label: t("nav.nature"), href: `${prefix}${lang === "en" ? "/experience/nature/" : "/erleben/natur/"}` },
+      { label: t("nav.culture"), href: `${prefix}${lang === "en" ? "/experience/culture/" : "/erleben/kultur/"}` },
+      { label: t("nav.families"), href: `${prefix}${lang === "en" ? "/experience/families/" : "/erleben/familien/"}` },
     ],
   },
   {
-    label: "Entdecken",
-    href: "/entdecken/",
+    label: t("nav.discover"),
+    href: `${prefix}${lang === "en" ? "/discover/" : "/entdecken/"}`,
     children: [
-      { label: "Salzhemmendorf", href: "/entdecken/salzhemmendorf/" },
-      { label: "Coppenbrügge", href: "/entdecken/coppenbruegge/" },
-      { label: "Interaktive Karte", href: "/entdecken/karte/" },
+      { label: t("nav.salzhemmendorf"), href: `${prefix}${lang === "en" ? "/discover/salzhemmendorf/" : "/entdecken/salzhemmendorf/"}` },
+      { label: t("nav.coppenbruegge"), href: `${prefix}${lang === "en" ? "/discover/coppenbruegge/" : "/entdecken/coppenbruegge/"}` },
+      { label: t("nav.map"), href: `${prefix}${lang === "en" ? "/discover/map/" : "/entdecken/karte/"}` },
     ],
   },
   {
-    label: "Planen",
-    href: "/planen/",
+    label: t("nav.plan"),
+    href: `${prefix}${lang === "en" ? "/plan/" : "/planen/"}`,
     children: [
-      { label: "Unterkünfte", href: "/planen/unterkuenfte/" },
-      { label: "Gastronomie", href: "/planen/gastronomie/" },
-      { label: "Anreise & Parken", href: "/planen/anreise/" },
-      { label: "Barrierefrei", href: "/planen/barrierefrei/" },
+      { label: t("nav.accommodation"), href: `${prefix}${lang === "en" ? "/plan/accommodation/" : "/planen/unterkuenfte/"}` },
+      { label: t("nav.gastronomy"), href: `${prefix}${lang === "en" ? "/plan/dining/" : "/planen/gastronomie/"}` },
+      { label: t("nav.arrival"), href: `${prefix}${lang === "en" ? "/plan/getting-here/" : "/planen/anreise/"}` },
+      { label: t("nav.accessible"), href: `${prefix}${lang === "en" ? "/plan/accessibility/" : "/planen/barrierefrei/"}` },
     ],
   },
-  { label: "Veranstaltungen", href: "/veranstaltungen/" },
-  { label: "Regional", href: "/regional/" },
+  { label: t("nav.events"), href: `${prefix}${lang === "en" ? "/events/" : "/veranstaltungen/"}` },
+  { label: t("nav.regional"), href: `${prefix}/regional/` },
 ];
 
 function isActive(href: string): boolean {
-  if (href === "/") return currentPath === "/";
+  if (href === "/" || href === "/en/") return currentPath === href;
   return currentPath.startsWith(href);
 }
 ---
@@ -150,6 +156,10 @@ function isActive(href: string): boolean {
         }
       </nav>
 
+      <div class="flex items-center gap-2">
+        <!-- Language Switcher -->
+        <LanguageSwitcher />
+
       <!-- Mobile Menu Button -->
       <button
         class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -165,6 +175,7 @@ function isActive(href: string): boolean {
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
+      </div>
     </div>
   </div>
 

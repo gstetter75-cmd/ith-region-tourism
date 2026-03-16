@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Contact" description="Contact the Ith-Region tourist information.">
+  <section class="pt-28 pb-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Contact</h1>
+      <p class="text-anthracite-light text-lg mb-10">Questions about the Ith-Region? We're happy to help.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-xl font-bold mb-6">Tourist Information</h2>
+          <address class="not-italic space-y-4 text-anthracite">
+            <div>
+              <h3 class="font-semibold text-sm text-anthracite-light uppercase tracking-wider mb-1">Address</h3>
+              <p>Flecken Salzhemmendorf<br />Hauptstraße 4<br />31020 Salzhemmendorf<br />Germany</p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-anthracite-light uppercase tracking-wider mb-1">Phone</h3>
+              <p><a href="tel:+4951535008100" class="text-ith-blue">+49 5153 5008-100</a></p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-anthracite-light uppercase tracking-wider mb-1">Email</h3>
+              <p><a href="mailto:tourismus@salzhemmendorf.de" class="text-ith-blue">tourismus@salzhemmendorf.de</a></p>
+            </div>
+          </address>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold mb-6">Send a Message</h2>
+          <form name="contact-en" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
+            <input type="hidden" name="form-name" value="contact-en" />
+            <p class="hidden"><label>Do not fill: <input name="bot-field" /></label></p>
+            <div>
+              <label for="name-en" class="block text-sm font-medium text-anthracite mb-1">Name *</label>
+              <input type="text" id="name-en" name="name" required autocomplete="name" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors" />
+            </div>
+            <div>
+              <label for="email-en" class="block text-sm font-medium text-anthracite mb-1">Email *</label>
+              <input type="email" id="email-en" name="email" required autocomplete="email" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors" />
+            </div>
+            <div>
+              <label for="message-en" class="block text-sm font-medium text-anthracite mb-1">Message *</label>
+              <textarea id="message-en" name="message" rows="5" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors resize-y"></textarea>
+            </div>
+            <div>
+              <label for="privacy-en" class="flex items-start gap-2 text-sm text-anthracite-light">
+                <input type="checkbox" id="privacy-en" name="privacy" required class="mt-1" />
+                <span>I have read the <a href="/datenschutz/" class="text-ith-blue underline">Privacy Policy</a> and agree to the processing of my data. *</span>
+              </label>
+            </div>
+            <button type="submit" class="btn-primary w-full justify-center">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

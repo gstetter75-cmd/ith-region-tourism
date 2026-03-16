@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Interactive Map" description="Interactive map of the Ith-Region: trails, attractions, car parks and dining.">
+  <section class="pt-24 pb-8 bg-white">
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Interactive Map</h1>
+      <p class="text-anthracite-light text-lg mb-4">Explore hiking trails, attractions, car parks and dining options in the Ith-Region.</p>
+      <p class="text-sm text-anthracite-light">
+        <a href="/entdecken/karte/" class="text-ith-blue">View full map with filters (German)</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16">
+    <div class="container mx-auto px-4">
+      <div id="map" class="w-full h-[600px] rounded-xl shadow-lg border border-gray-200"></div>
+    </div>
+  </section>
+
+  <link rel="stylesheet" href="/styles/leaflet.css" />
+
+  <script>
+    import L from "leaflet";
+
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: "/images/leaflet/marker-icon-2x.png",
+      iconUrl: "/images/leaflet/marker-icon.png",
+      shadowUrl: "/images/leaflet/marker-shadow.png",
+    });
+
+    const map = L.map("map").setView([52.09, 9.57], 12);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18,
+    }).addTo(map);
+
+    const markers = [
+      { lat: 52.067, lng: 9.585, title: "Salzhemmendorf", desc: "Town centre" },
+      { lat: 52.115, lng: 9.545, title: "Coppenbrügge", desc: "Historic town with castle" },
+      { lat: 52.075, lng: 9.575, title: "Ith-Sole Spa", desc: "Wellness and bathing" },
+      { lat: 52.09, lng: 9.56, title: "Ith Ridge", desc: "Climbing and hiking" },
+      { lat: 52.06, lng: 9.61, title: "Rasti-Land", desc: "Theme park" },
+    ];
+
+    markers.forEach((m) => {
+      L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<strong>${m.title}</strong><br>${m.desc}`);
+    });
+  </script>
+</BaseLayout>

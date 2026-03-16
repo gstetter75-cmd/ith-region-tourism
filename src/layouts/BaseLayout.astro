@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import ScrollToTop from "../components/ScrollToTop.astro";
+import { getLangFromUrl, getLocalizedPath } from "../i18n/utils";
 import "../styles/global.css";
 
 interface Props {
@@ -11,18 +12,32 @@ interface Props {
   ogImage?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const isEnglish = lang === "en";
+
 const {
   title,
-  description = "Die Ith-Region erleben: Wandern, Radfahren, Klettern und Natur im Weserbergland. Salzhemmendorf & Coppenbrügge - Jeder Weg ist dein Erlebnis.",
+  description = isEnglish
+    ? "Discover the Ith-Region: Hiking, cycling, climbing and nature in the Weserbergland. Salzhemmendorf & Coppenbrügge – Every Path is Your Adventure."
+    : "Die Ith-Region erleben: Wandern, Radfahren, Klettern und Natur im Weserbergland. Salzhemmendorf & Coppenbrügge - Jeder Weg ist dein Erlebnis.",
   ogImage = "/images/og-default.jpg",
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === "Startseite" ? "Ith-Region | Jeder Weg ist dein Erlebnis" : `${title} | Ith-Region`;
+const homeTitles = { de: "Startseite", en: "Home" };
+const fullTitle = title === homeTitles[lang]
+  ? `Ith-Region | ${isEnglish ? "Every Path is Your Adventure" : "Jeder Weg ist dein Erlebnis"}`
+  : `${title} | Ith-Region`;
+
+const ogLocale = isEnglish ? "en_GB" : "de_DE";
+const alternateLang = isEnglish ? "de" : "en";
+const alternatePath = getLocalizedPath(Astro.url.pathname, alternateLang as "de" | "en");
+const alternateUrl = new URL(alternatePath, Astro.site);
+const skipText = isEnglish ? "Skip to main content" : "Zum Hauptinhalt springen";
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,6 +45,9 @@ const fullTitle = title === "Startseite" ? "Ith-Region | Jeder Weg ist dein Erle
     <meta name="theme-color" content="#0174c3" />
 
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
+    <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL(getLocalizedPath(Astro.url.pathname, "de"), Astro.site)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     <link rel="manifest" href="/manifest.json" />
@@ -44,7 +62,7 @@ const fullTitle = title === "Startseite" ? "Ith-Region | Jeder Weg ist dein Erle
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -61,15 +79,12 @@ const fullTitle = title === "Startseite" ? "Ith-Region | Jeder Weg ist dein Erle
         name: "Ith-Region",
         description: description,
         url: Astro.site?.toString(),
-        touristType: [
-          "Aktivtouristen",
-          "Familien",
-          "Kurzurlauber",
-          "Kulturinteressierte",
-        ],
+        touristType: isEnglish
+          ? ["Active tourists", "Families", "Short-break travelers", "Culture enthusiasts"]
+          : ["Aktivtouristen", "Familien", "Kurzurlauber", "Kulturinteressierte"],
         containedInPlace: {
           "@type": "AdministrativeArea",
-          name: "Weserbergland, Niedersachsen",
+          name: "Weserbergland, Lower Saxony, Germany",
         },
       })}
     />
@@ -78,7 +93,7 @@ const fullTitle = title === "Startseite" ? "Ith-Region | Jeder Weg ist dein Erle
   </head>
   <body class="min-h-screen flex flex-col bg-white">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-ith-blue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
-      Zum Hauptinhalt springen
+      {skipText}
     </a>
     <Header />
     <main id="main-content" class="flex-1">

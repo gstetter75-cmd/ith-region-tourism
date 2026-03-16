@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Hero from "../../../components/Hero.astro";
+import Card from "../../../components/Card.astro";
+---
+
+<BaseLayout title="Discover" description="Discover the Ith-Region: Salzhemmendorf, Coppenbrügge and their villages.">
+  <Hero title="Discover the Region" subtitle="Two towns, over 20 villages and a shared identity in the heart of the Weserbergland." imageSrc="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=800&fit=crop" imageAlt="Green hilly landscape" size="medium" />
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card title="Salzhemmendorf" description="Rural idyll with 11 villages, approx. 10,000 residents and a rich salt-mining history." imageSrc="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=600&h=450&fit=crop" imageAlt="Rural community" href="/en/discover/salzhemmendorf/" />
+        <Card title="Coppenbrügge" description="Historic town with medieval castle at the foot of the Ith." imageSrc="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=450&fit=crop" imageAlt="Historic town" href="/en/discover/coppenbruegge/" />
+        <Card title="Interactive Map" description="All highlights, trails, car parks and attractions at a glance." imageSrc="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&h=450&fit=crop" imageAlt="Map view" href="/en/discover/map/" tag="Map" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

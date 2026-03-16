@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Hero from "../../../components/Hero.astro";
+import Card from "../../../components/Card.astro";
+---
+
+<BaseLayout title="Plan Your Visit" description="Plan your visit to the Ith-Region: accommodation, dining, getting here and accessibility.">
+  <Hero title="Plan Your Visit" subtitle="Everything for your stay in the Ith-Region." imageSrc="https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1920&h=800&fit=crop" imageAlt="Hiker looking into the distance" size="medium" />
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <Card title="Accommodation" description="Holiday apartments, guest houses and camping sites." imageSrc="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=450&fit=crop" imageAlt="Cosy accommodation" href="/en/plan/accommodation/" />
+        <Card title="Dining" description="Restaurants, cafés, farm shops and regional specialities." imageSrc="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=450&fit=crop" imageAlt="Regional dish" href="/en/plan/dining/" />
+        <Card title="Getting Here" description="Directions, public transport and trailhead parking." imageSrc="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=450&fit=crop" imageAlt="Road through countryside" href="/en/plan/getting-here/" />
+        <Card title="Accessibility" description="Barrier-free paths, accommodation and activities." imageSrc="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&h=450&fit=crop" imageAlt="Accessible path" href="/en/plan/accessibility/" tag="Accessible" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

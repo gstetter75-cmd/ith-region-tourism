@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Hero from "../../../components/Hero.astro";
+import Card from "../../../components/Card.astro";
+
+const activities = [
+  { title: "Hiking", description: "The award-winning Ith-Hils Trail and themed hiking paths through the Weserbergland.", imageSrc: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=450&fit=crop", imageAlt: "Hiker on a forest trail", href: "/en/experience/hiking/", tag: "Quality Trail" },
+  { title: "Cycling", description: "Leisurely and sporty tours through the gentle hills between Ith and Hils.", imageSrc: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&h=450&fit=crop", imageAlt: "Cyclist in nature", href: "/en/experience/cycling/", tag: "Cycle Tours" },
+  { title: "Climbing", description: "Spectacular rock formations make the Ith one of Northern Germany's most popular climbing areas.", imageSrc: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600&h=450&fit=crop", imageAlt: "Climber on rock face", href: "/en/experience/climbing/", tag: "Climbing Area" },
+  { title: "Nature & Photo Spots", description: "Viewpoints, sunset spots and bizarre rock formations for unforgettable moments.", imageSrc: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=450&fit=crop", imageAlt: "Panoramic view over hills", href: "/en/experience/nature/", tag: "Photo Spots" },
+  { title: "Culture & History", description: "Historic town centres, traditional crafts, museums and a vibrant community life.", imageSrc: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=600&h=450&fit=crop", imageAlt: "Historic building", href: "/en/experience/culture/", tag: "Culture" },
+  { title: "Families", description: "Rasti-Land theme park, adventure trails, playgrounds and nature experiences for all ages.", imageSrc: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=450&fit=crop", imageAlt: "Family walking", href: "/en/experience/families/", tag: "Family-Friendly" },
+];
+---
+
+<BaseLayout title="Experience" description="Activities in the Ith-Region: hiking, cycling, climbing, nature, culture and family fun.">
+  <Hero title="Experience" subtitle="Whether active in nature, culturally curious or looking for family fun – the Ith-Region has something for everyone." imageSrc="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=800&fit=crop" imageAlt="Mountain landscape" size="medium" />
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {activities.map((a) => <Card {...a} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
