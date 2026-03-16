@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Ith-Region Tourism">
+  <metadata>
+    <name>Ith-Hils-Weg Etappe 7: Salzhemmendorf - Coppenbrügge</name>
+    <desc>Die letzte Etappe des Ith-Hils-Wegs verbindet Salzhemmendorf und Coppenbrügge. Ca. 10 km, 3 Stunden.</desc>
+  </metadata>
+  <trk>
+    <name>Etappe 7: Salzhemmendorf - Coppenbrügge</name>
+    <type>Hiking</type>
+    <trkseg>
+      <trkpt lat="52.0670" lon="9.5850"><ele>180</ele></trkpt>
+      <trkpt lat="52.0695" lon="9.5820"><ele>195</ele></trkpt>
+      <trkpt lat="52.0720" lon="9.5780"><ele>220</ele></trkpt>
+      <trkpt lat="52.0745" lon="9.5750"><ele>260</ele></trkpt>
+      <trkpt lat="52.0770" lon="9.5720"><ele>300</ele></trkpt>
+      <trkpt lat="52.0800" lon="9.5700"><ele>340</ele></trkpt>
+      <trkpt lat="52.0830" lon="9.5680"><ele>370</ele></trkpt>
+      <trkpt lat="52.0860" lon="9.5660"><ele>390</ele></trkpt>
+      <trkpt lat="52.0890" lon="9.5640"><ele>380</ele></trkpt>
+      <trkpt lat="52.0920" lon="9.5620"><ele>360</ele></trkpt>
+      <trkpt lat="52.0950" lon="9.5600"><ele>340</ele></trkpt>
+      <trkpt lat="52.0980" lon="9.5580"><ele>310</ele></trkpt>
+      <trkpt lat="52.1010" lon="9.5560"><ele>280</ele></trkpt>
+      <trkpt lat="52.1040" lon="9.5540"><ele>250</ele></trkpt>
+      <trkpt lat="52.1070" lon="9.5520"><ele>220</ele></trkpt>
+      <trkpt lat="52.1100" lon="9.5490"><ele>195</ele></trkpt>
+      <trkpt lat="52.1130" lon="9.5470"><ele>175</ele></trkpt>
+      <trkpt lat="52.1150" lon="9.5450"><ele>160</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>

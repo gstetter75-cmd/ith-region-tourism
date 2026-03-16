@@ -6,10 +6,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   <section class="pt-24 pb-8 bg-white">
     <div class="container mx-auto px-4">
       <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Interaktive Karte</h1>
-      <p class="text-anthracite-light text-lg mb-6">
+      <p class="text-anthracite-light text-lg mb-4">
         Entdecke Wanderwege, Sehenswürdigkeiten, Parkplätze und Einkehrmöglichkeiten
         in der Ith-Region.
       </p>
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        <button class="filter-btn active px-3 py-1.5 text-sm rounded-full border border-gray-300 bg-ith-blue text-white" data-filter="all">Alle</button>
+        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="sehenswuerdigkeit">Sehenswürdigkeiten</button>
+        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="parkplatz">Parkplätze</button>
+        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="gastronomie">Gastronomie</button>
+        <button class="filter-btn px-3 py-1.5 text-sm rounded-full border border-gray-300 hover:bg-ith-blue-light" data-filter="freizeit">Freizeit</button>
+      </div>
     </div>
   </section>
 
@@ -20,10 +28,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         class="w-full h-[600px] rounded-xl shadow-lg border border-gray-200"
       ></div>
 
-      <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+      <div class="mt-6 flex flex-wrap gap-6 text-sm">
         <div class="flex items-center gap-2">
-          <span class="w-4 h-4 rounded-full bg-ith-green"></span>
-          <span class="text-anthracite-light">Wanderwege</span>
+          <span class="w-4 h-1 bg-ith-green rounded"></span>
+          <span class="text-anthracite-light">Ith-Hils-Weg Etappe 7</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="w-4 h-4 rounded-full bg-ith-blue"></span>
@@ -37,6 +45,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <span class="w-4 h-4 rounded-full bg-ith-red"></span>
           <span class="text-anthracite-light">Gastronomie</span>
         </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-amber-500"></span>
+          <span class="text-anthracite-light">Freizeit</span>
+        </div>
+      </div>
+
+      <!-- GPX Download -->
+      <div class="mt-6 p-4 bg-sand rounded-xl flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1">
+          <h3 class="font-semibold text-anthracite text-sm">GPS-Tracks herunterladen</h3>
+          <p class="text-anthracite-light text-xs mt-1">
+            Lade die GPX-Dateien für dein GPS-Gerät oder deine Wander-App herunter.
+          </p>
+        </div>
+        <a
+          href="/gpx/ith-hils-weg-etappe7.gpx"
+          download
+          class="btn-primary text-sm py-2 px-4"
+        >
+          Etappe 7 GPX
+        </a>
       </div>
     </div>
   </section>
@@ -52,47 +81,126 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   <script>
     import L from "leaflet";
 
-    // Center on Ith-Region (between Salzhemmendorf and Coppenbrügge)
-    const map = L.map("map").setView([52.065, 9.60], 12);
+    // Fix Leaflet default icon issue
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+      iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    });
+
+    // Create colored marker icons
+    function createIcon(color: string) {
+      return L.divIcon({
+        className: "custom-marker",
+        html: `<div style="background:${color};width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, -14],
+      });
+    }
+
+    const icons: Record<string, L.DivIcon> = {
+      sehenswuerdigkeit: createIcon("#0174c3"),
+      parkplatz: createIcon("#00A5A8"),
+      gastronomie: createIcon("#d53f3f"),
+      freizeit: createIcon("#f59e0b"),
+    };
+
+    // Center on Ith-Region
+    const map = L.map("map").setView([52.09, 9.57], 12);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 18,
     }).addTo(map);
 
-    // Example markers
-    const markers = [
-      {
-        lat: 52.067,
-        lng: 9.585,
-        title: "Salzhemmendorf",
-        desc: "Zentrum des Fleckens Salzhemmendorf",
-      },
-      {
-        lat: 52.115,
-        lng: 9.545,
-        title: "Coppenbrügge",
-        desc: "Historischer Flecken mit Burg",
-      },
-      {
-        lat: 52.075,
-        lng: 9.57,
-        title: "Ith-Sole-Therme",
-        desc: "Wellness und Badevergnügen",
-      },
-      {
-        lat: 52.09,
-        lng: 9.56,
-        title: "Ith-Kammweg",
-        desc: "Zugang zu Klettergebieten und Aussichtspunkten",
-      },
+    // POI data
+    const pois = [
+      { lat: 52.0670, lng: 9.5850, title: "Salzhemmendorf", desc: "Zentrum des Fleckens", cat: "sehenswuerdigkeit" },
+      { lat: 52.1150, lng: 9.5450, title: "Coppenbrügge", desc: "Historischer Flecken mit Burg", cat: "sehenswuerdigkeit" },
+      { lat: 52.1160, lng: 9.5430, title: "Burg Coppenbrügge", desc: "Mittelalterliche Burganlage mit Museum", cat: "sehenswuerdigkeit" },
+      { lat: 52.0900, lng: 9.5600, title: "Ith-Kammweg", desc: "Zugang zu Klettergebieten und Aussichtspunkten", cat: "sehenswuerdigkeit" },
+      { lat: 52.0830, lng: 9.5680, title: "Adam und Eva Felsen", desc: "Beliebte Kletterrouten und Aussicht", cat: "sehenswuerdigkeit" },
+      { lat: 52.0750, lng: 9.5700, title: "Wanderparkplatz Ith Süd", desc: "Ausgangspunkt für Wanderungen", cat: "parkplatz" },
+      { lat: 52.1000, lng: 9.5550, title: "Wanderparkplatz Ith Nord", desc: "Zugang zum Kammweg", cat: "parkplatz" },
+      { lat: 52.0680, lng: 9.5900, title: "Parkplatz Ortsmitte", desc: "Zentraler Parkplatz Salzhemmendorf", cat: "parkplatz" },
+      { lat: 52.0750, lng: 9.5750, title: "Ith-Sole-Therme", desc: "Wellness und Badevergnügen", cat: "freizeit" },
+      { lat: 52.0600, lng: 9.6100, title: "Rasti-Land", desc: "Freizeitpark für die ganze Familie", cat: "freizeit" },
+      { lat: 52.0660, lng: 9.5870, title: "Gasthaus Zur Linde", desc: "Regionale Küche", cat: "gastronomie" },
+      { lat: 52.1140, lng: 9.5460, title: "Burgschänke Coppenbrügge", desc: "Gemütliche Einkehr am Burggelände", cat: "gastronomie" },
     ];
 
-    markers.forEach((m) => {
-      L.marker([m.lat, m.lng])
-        .addTo(map)
-        .bindPopup(`<strong>${m.title}</strong><br>${m.desc}`);
+    // Create marker layers
+    const layerGroups: Record<string, L.LayerGroup> = {
+      sehenswuerdigkeit: L.layerGroup(),
+      parkplatz: L.layerGroup(),
+      gastronomie: L.layerGroup(),
+      freizeit: L.layerGroup(),
+    };
+
+    pois.forEach((poi) => {
+      const marker = L.marker([poi.lat, poi.lng], { icon: icons[poi.cat] })
+        .bindPopup(`<strong>${poi.title}</strong><br><span style="color:#636e72">${poi.desc}</span>`);
+      layerGroups[poi.cat].addLayer(marker);
+    });
+
+    // Add all layers by default
+    Object.values(layerGroups).forEach((lg) => lg.addTo(map));
+
+    // Load GPX route
+    async function loadGPX() {
+      try {
+        const response = await fetch("/gpx/ith-hils-weg-etappe7.gpx");
+        const gpxText = await response.text();
+        const parser = new DOMParser();
+        const gpx = parser.parseFromString(gpxText, "text/xml");
+        const trkpts = gpx.querySelectorAll("trkpt");
+        const latlngs: L.LatLngExpression[] = [];
+
+        trkpts.forEach((pt) => {
+          const lat = parseFloat(pt.getAttribute("lat") ?? "0");
+          const lon = parseFloat(pt.getAttribute("lon") ?? "0");
+          latlngs.push([lat, lon]);
+        });
+
+        if (latlngs.length > 0) {
+          L.polyline(latlngs, {
+            color: "#4A7C59",
+            weight: 4,
+            opacity: 0.8,
+            dashArray: "10 6",
+          }).addTo(map).bindPopup("<strong>Ith-Hils-Weg Etappe 7</strong><br>Salzhemmendorf → Coppenbrügge<br>10 km, ca. 3 Stunden");
+        }
+      } catch {
+        // GPX loading failed silently
+      }
+    }
+
+    loadGPX();
+
+    // Filter buttons
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = (btn as HTMLElement).dataset.filter;
+
+        document.querySelectorAll(".filter-btn").forEach((b) => {
+          b.classList.remove("active", "bg-ith-blue", "text-white");
+        });
+        btn.classList.add("active", "bg-ith-blue", "text-white");
+
+        if (filter === "all") {
+          Object.values(layerGroups).forEach((lg) => lg.addTo(map));
+        } else if (filter) {
+          Object.entries(layerGroups).forEach(([cat, lg]) => {
+            if (cat === filter) {
+              lg.addTo(map);
+            } else {
+              map.removeLayer(lg);
+            }
+          });
+        }
+      });
     });
   </script>
 </BaseLayout>
