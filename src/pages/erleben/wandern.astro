@@ -1,0 +1,94 @@
+---
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import Card from "../../components/Card.astro";
+---
+
+<ContentLayout
+  title="Wandern"
+  description="Wandern in der Ith-Region: Ith-Hils-Weg, Themenwanderwege und Rundwege im Weserbergland."
+  heroImage="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920&h=800&fit=crop"
+  heroImageAlt="Wanderer auf einem Waldweg im Weserbergland"
+  heroSubtitle="Der Ith-Hils-Weg und zahlreiche Themenwege laden zu Entdeckungstouren ein"
+>
+  <h2>Ith-Hils-Weg – Qualitätswanderweg</h2>
+  <p>
+    Der <strong>Ith-Hils-Weg</strong> ist als <em>Qualitätsweg Wanderbares Deutschland</em>
+    ausgezeichnet und führt auf rund <strong>80 Kilometern</strong> über die namensgebenden
+    Höhenzüge Ith und Hils im östlichen Weserbergland. Die Strecke verläuft durch
+    spektakuläre Felslandschaften, vorbei an bizarren Gesteinsformationen, historischen
+    Türmen und idyllischen Seenlandschaften.
+  </p>
+
+  <div class="bg-ith-blue-light rounded-xl p-6 my-8 not-prose">
+    <h3 class="text-ith-blue-dark font-bold text-lg mb-3">Auf einen Blick</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+      <div>
+        <span class="block text-anthracite-light">Gesamtlänge</span>
+        <span class="font-semibold text-anthracite">ca. 80 km</span>
+      </div>
+      <div>
+        <span class="block text-anthracite-light">Etappen</span>
+        <span class="font-semibold text-anthracite">7 Etappen</span>
+      </div>
+      <div>
+        <span class="block text-anthracite-light">Schwierigkeit</span>
+        <span class="font-semibold text-anthracite">Mittel</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Etappe 7: Salzhemmendorf – Coppenbrügge</h3>
+  <p>
+    Die letzte Etappe des Ith-Hils-Wegs verbindet die beiden Flecken der Ith-Region.
+    Auf <strong>10 Kilometern</strong> führt der Weg entlang historischer Türme,
+    durch Seenlandschaften und vorbei an den spektakulären Klippen des Ith.
+    Die Gehzeit beträgt etwa 3 Stunden.
+  </p>
+
+  <h2>Themenwanderwege</h2>
+  <p>
+    Neben dem Ith-Hils-Weg bietet die Region zahlreiche kürzere Rundwege und
+    Themenwanderwege, die verschiedene Aspekte der Landschaft und Geschichte
+    erschließen:
+  </p>
+  <ul>
+    <li><strong>Natur-Erlebniswege</strong> – Flora und Fauna des Ith entdecken</li>
+    <li><strong>Geschichtspfade</strong> – Historische Stätten und Denkmäler</li>
+    <li><strong>Genuss-Routen</strong> – Wandern mit kulinarischen Stopps bei regionalen Anbietern</li>
+    <li><strong>Barrierefreie Rundwege</strong> – Leichte Wege für Senioren und Familien mit Kinderwagen</li>
+  </ul>
+
+  <h2>Praktische Informationen</h2>
+  <div class="bg-sand rounded-xl p-6 my-8 not-prose">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+      <div>
+        <h4 class="font-semibold text-anthracite mb-2">Wanderparkplätze</h4>
+        <p class="text-anthracite-light">
+          Mehrere ausgewiesene Wanderparkplätze stehen als Ausgangspunkte zur Verfügung.
+          Details finden Sie auf unserer <a href="/entdecken/karte/" class="text-ith-blue">interaktiven Karte</a>.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-anthracite mb-2">Digitale Karten</h4>
+        <p class="text-anthracite-light">
+          Alle Routen sind auf Komoot und Outdooractive verfügbar.
+          GPS-Tracks können heruntergeladen werden.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-anthracite mb-2">Einkehr & Rast</h4>
+        <p class="text-anthracite-light">
+          Entlang der Wege finden Sie Rastplätze, Schutzhütten und
+          Einkehrmöglichkeiten bei lokalen Gastronomen.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-anthracite mb-2">Beste Jahreszeit</h4>
+        <p class="text-anthracite-light">
+          Ganzjährig begehbar. Besonders empfehlenswert im Frühling (Blüte)
+          und Herbst (Laubfärbung). Winterwandern ebenfalls möglich.
+        </p>
+      </div>
+    </div>
+  </div>
+</ContentLayout>

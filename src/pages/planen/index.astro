@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Card from "../../components/Card.astro";
+---
+
+<BaseLayout title="Besuch planen" description="Planen Sie Ihren Besuch in der Ith-Region: Unterkünfte, Gastronomie, Anreise und barrierefreie Angebote.">
+  <Hero
+    title="Besuch planen"
+    subtitle="Alles für Ihren Aufenthalt in der Ith-Region: Unterkünfte, Gastronomie und Anreise-Informationen."
+    imageSrc="https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1920&h=800&fit=crop"
+    imageAlt="Wanderer mit Rucksack blickt in die Ferne"
+    size="medium"
+  />
+
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <Card
+          title="Unterkünfte"
+          description="Ferienwohnungen, Pensionen und Campingplätze in der Ith-Region."
+          imageSrc="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=450&fit=crop"
+          imageAlt="Gemütliche Unterkunft"
+          href="/planen/unterkuenfte/"
+        />
+        <Card
+          title="Gastronomie"
+          description="Restaurants, Cafés, Hofläden und regionale Spezialitäten."
+          imageSrc="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=450&fit=crop"
+          imageAlt="Regionales Gericht"
+          href="/planen/gastronomie/"
+        />
+        <Card
+          title="Anreise & Parken"
+          description="Wegbeschreibung, ÖPNV-Verbindungen und Wanderparkplätze."
+          imageSrc="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=450&fit=crop"
+          imageAlt="Straße durch die Landschaft"
+          href="/planen/anreise/"
+        />
+        <Card
+          title="Barrierefreie Angebote"
+          description="Barrierefreie Wege, Unterkünfte und Aktivitäten für alle."
+          imageSrc="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&h=450&fit=crop"
+          imageAlt="Barrierefreier Weg in der Natur"
+          href="/planen/barrierefrei/"
+          tag="Barrierefrei"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

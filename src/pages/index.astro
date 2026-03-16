@@ -1,0 +1,222 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Card from "../components/Card.astro";
+
+const activities = [
+  {
+    title: "Wandern",
+    description:
+      "Entdecke den preisgekrönten Ith-Hils-Weg und zahlreiche Themenwanderwege durch das Weserbergland.",
+    imageSrc: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=450&fit=crop",
+    imageAlt: "Wanderer auf einem Waldweg",
+    href: "/erleben/wandern/",
+    tag: "Qualitätswanderweg",
+  },
+  {
+    title: "Radfahren",
+    description:
+      "Auf gut ausgebauten Radwegen die sanfte Hügellandschaft der Ith-Region erkunden.",
+    imageSrc: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&h=450&fit=crop",
+    imageAlt: "Radfahrer auf einem Weg durch die Natur",
+    href: "/erleben/radfahren/",
+    tag: "Radtouren",
+  },
+  {
+    title: "Klettern",
+    description:
+      "Der Ith bietet spektakuläre Felsformationen und ist eines der beliebtesten Klettergebiete Norddeutschlands.",
+    imageSrc: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600&h=450&fit=crop",
+    imageAlt: "Kletterer an einer Felswand",
+    href: "/erleben/klettern/",
+    tag: "Klettergebiet",
+  },
+  {
+    title: "Natur & Foto-Spots",
+    description:
+      "Aussichtspunkte, Sonnenuntergangsspots und bizarre Felsformationen warten auf dich.",
+    imageSrc: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=450&fit=crop",
+    imageAlt: "Panoramablick über bewaldete Hügel",
+    href: "/erleben/natur/",
+    tag: "Foto-Spots",
+  },
+  {
+    title: "Kultur & Geschichte",
+    description:
+      "Historische Ortskerne, traditionelles Handwerk und lebendiges Vereinsleben erleben.",
+    imageSrc: "https://images.unsplash.com/photo-1562932831-afcfe735cd7d?w=600&h=450&fit=crop",
+    imageAlt: "Historisches Fachwerkhaus",
+    href: "/erleben/kultur/",
+    tag: "Kultur",
+  },
+  {
+    title: "Familien",
+    description:
+      "Rasti-Land, Erlebniswege, Spielplätze und tierische Begegnungen für die ganze Familie.",
+    imageSrc: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=450&fit=crop",
+    imageAlt: "Familie auf einem Waldspaziergang",
+    href: "/erleben/familien/",
+    tag: "Familienfreundlich",
+  },
+];
+
+const highlights = [
+  {
+    icon: "🥾",
+    title: "80 km Qualitätswanderweg",
+    text: "Ith-Hils-Weg – ausgezeichnet als Qualitätsweg Wanderbares Deutschland",
+  },
+  {
+    icon: "🧗",
+    title: "Top-Klettergebiet",
+    text: "Spektakuläre Felsformationen am Ith mit markierten Kletterrouten",
+  },
+  {
+    icon: "🏡",
+    title: "11+ Ortsteile",
+    text: "Charme und Gastfreundschaft in zwei Flecken mit reicher Geschichte",
+  },
+  {
+    icon: "♨️",
+    title: "Ith-Sole-Therme",
+    text: "Entspannung und Wellness mitten im Weserbergland",
+  },
+];
+---
+
+<BaseLayout title="Startseite">
+  <!-- Hero Section -->
+  <Hero
+    title="Jeder Weg ist dein Erlebnis"
+    subtitle="Entdecke die Ith-Region im Weserbergland – Wandern, Klettern, Radfahren und Natur pur in Salzhemmendorf & Coppenbrügge."
+    imageSrc="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop"
+    imageAlt="Panoramablick über den Ith-Höhenzug im Weserbergland"
+    ctaText="Region entdecken"
+    ctaHref="/entdecken/"
+    ctaSecondaryText="Aktivitäten ansehen"
+    ctaSecondaryHref="/erleben/"
+    size="full"
+  />
+
+  <!-- Highlights Bar -->
+  <section class="bg-ith-blue-dark text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+          highlights.map((h) => (
+            <div class="flex items-start gap-4">
+              <span class="text-3xl" aria-hidden="true">{h.icon}</span>
+              <div>
+                <h3 class="text-white font-semibold text-sm">{h.title}</h3>
+                <p class="text-blue-200 text-xs mt-1">{h.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities Section -->
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">
+          Was möchtest du erleben?
+        </h2>
+        <p class="text-anthracite-light text-lg max-w-2xl mx-auto">
+          Die Ith-Region bietet für jeden das passende Erlebnis – ob sportlich
+          aktiv, naturverbunden oder kulturinteressiert.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {activities.map((activity) => <Card {...activity} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Region Teaser -->
+  <section class="section-padding bg-white">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span
+            class="inline-block text-ith-teal font-semibold text-sm uppercase tracking-wider mb-3"
+            >Über die Region</span
+          >
+          <h2 class="text-3xl sm:text-4xl font-extrabold mb-6">
+            Zwei Flecken, eine Region
+          </h2>
+          <p class="text-anthracite-light leading-relaxed mb-4">
+            Die Ith-Region verbindet die Flecken <strong>Salzhemmendorf</strong> und
+            <strong>Coppenbrügge</strong> zu einem gemeinsamen Tourismuserlebnis im
+            Herzen des Weserberglands. Ländliche Idylle, vielfältige Natur und
+            lebendige Traditionen machen unsere Region zu einem einzigartigen
+            Rückzugsort.
+          </p>
+          <p class="text-anthracite-light leading-relaxed mb-6">
+            Ob der preisgekrönte Ith-Hils-Weg, die spektakulären Kletterrouten am
+            Ith oder ein entspannter Tag in der Ith-Sole-Therme – hier findest du
+            Erholung und Abenteuer zugleich.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/entdecken/salzhemmendorf/" class="btn-primary">
+              Salzhemmendorf
+            </a>
+            <a href="/entdecken/coppenbruegge/" class="btn-secondary">
+              Coppenbrügge
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&h=500&fit=crop"
+            alt="Weserbergland Landschaft mit grünen Hügeln"
+            class="rounded-2xl shadow-lg w-full object-cover aspect-[4/3]"
+            loading="lazy"
+          />
+          <div
+            class="absolute -bottom-4 -left-4 bg-ith-teal text-white rounded-xl p-4 shadow-lg"
+          >
+            <span class="block text-2xl font-extrabold">10.000+</span>
+            <span class="text-sm text-white/80">Einwohner in der Region</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 overflow-hidden">
+    <img
+      src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1920&h=600&fit=crop"
+      alt="Wanderer bei Sonnenuntergang"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-ith-blue-dark/70"></div>
+    <div class="relative z-10 text-center text-white px-4">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+        Plane deinen Besuch
+      </h2>
+      <p class="text-lg text-white/80 mb-8 max-w-xl mx-auto">
+        Unterkünfte, Gastronomie und Anreise-Infos – alles was du für deinen
+        Aufenthalt in der Ith-Region brauchst.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/planen/unterkuenfte/"
+          class="btn-primary bg-white text-ith-blue-dark hover:bg-sand hover:text-ith-blue-dark"
+        >
+          Unterkünfte finden
+        </a>
+        <a
+          href="/veranstaltungen/"
+          class="btn-secondary border-white text-white hover:bg-white hover:text-ith-blue-dark"
+        >
+          Veranstaltungen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

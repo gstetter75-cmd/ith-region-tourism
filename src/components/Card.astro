@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  href: string;
+  tag?: string;
+}
+
+const { title, description, imageSrc, imageAlt, href, tag } = Astro.props;
+---
+
+<a href={href} class="group block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 no-underline">
+  <div class="relative overflow-hidden aspect-[4/3]">
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      loading="lazy"
+    />
+    {tag && (
+      <span class="absolute top-3 left-3 bg-ith-teal text-white text-xs font-semibold px-3 py-1 rounded-full">
+        {tag}
+      </span>
+    )}
+  </div>
+  <div class="p-5">
+    <h3 class="text-lg font-semibold text-ith-blue-dark group-hover:text-ith-blue transition-colors mb-2">
+      {title}
+    </h3>
+    <p class="text-sm text-anthracite-light leading-relaxed line-clamp-3">
+      {description}
+    </p>
+    <span class="inline-flex items-center gap-1 text-sm font-medium text-ith-blue mt-3">
+      Mehr erfahren
+      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+  </div>
+</a>

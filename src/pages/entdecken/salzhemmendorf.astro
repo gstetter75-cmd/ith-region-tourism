@@ -1,0 +1,43 @@
+---
+import ContentLayout from "../../layouts/ContentLayout.astro";
+---
+
+<ContentLayout
+  title="Salzhemmendorf"
+  description="Der Flecken Salzhemmendorf: 11 Ortsteile, ländliche Idylle und aktives Gemeindeleben im Weserbergland."
+  heroImage="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=1920&h=800&fit=crop"
+  heroImageAlt="Ländliche Gemeinde im Weserbergland"
+  heroSubtitle="Ländliche Lebensqualität, vielfältige Natur und aktives Gemeindeleben"
+>
+  <h2>Der Flecken Salzhemmendorf</h2>
+  <p>
+    Der Flecken Salzhemmendorf ist eine ländlich geprägte Kommune mit hoher
+    Lebensqualität, vielfältiger Natur, traditionellem Brauchtum und einem
+    aktiven Vereinsleben. In den insgesamt <strong>11 Ortsteilen</strong> leben
+    ca. <strong>10.000 Einwohner</strong>.
+  </p>
+
+  <h3>Die 11 Ortsteile</h3>
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 my-8 not-prose">
+    {["Salzhemmendorf", "Lauenstein", "Wallensen", "Oldendorf", "Thüste", "Ockensen",
+      "Ahrenfeld", "Benstorf", "Hemmendorf", "Osterwald", "Levedagsen"].map((ort) => (
+      <div class="bg-sand rounded-lg p-3 text-center">
+        <span class="text-sm font-medium text-anthracite">{ort}</span>
+      </div>
+    ))}
+  </div>
+
+  <h3>Highlights</h3>
+  <ul>
+    <li><strong>Ith-Sole-Therme</strong> – Wellness und Badevergnügen</li>
+    <li><strong>Rasti-Land</strong> – Freizeitpark für die ganze Familie</li>
+    <li><strong>Historischer Ortskern</strong> – Fachwerk und Salzgeschichte</li>
+    <li><strong>IthPunkt</strong> – Touristisches Informationszentrum</li>
+  </ul>
+
+  <p>
+    Weitere Informationen zur Gemeinde finden Sie auf der
+    <a href="https://www.salzhemmendorf.de" target="_blank" rel="noopener noreferrer">
+      offiziellen Website des Fleckens Salzhemmendorf</a>.
+  </p>
+</ContentLayout>

@@ -1,0 +1,42 @@
+---
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-gray-200 shadow-2xl p-4 sm:p-6 hidden"
+  role="dialog"
+  aria-label="Cookie-Hinweis"
+>
+  <div class="container mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <div class="flex-1">
+      <p class="text-sm text-anthracite">
+        Wir verwenden nur technisch notwendige Cookies, um Ihnen die beste
+        Erfahrung auf unserer Website zu bieten. Weitere Informationen finden Sie
+        in unserer
+        <a href="/datenschutz/" class="text-ith-blue underline">Datenschutzerklärung</a>.
+      </p>
+    </div>
+    <div class="flex gap-3 shrink-0">
+      <button
+        id="cookie-accept"
+        class="btn-primary text-sm py-2 px-4"
+      >
+        Verstanden
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("cookie-accept");
+
+  if (!localStorage.getItem("ith-cookies-accepted")) {
+    banner?.classList.remove("hidden");
+  }
+
+  acceptBtn?.addEventListener("click", () => {
+    localStorage.setItem("ith-cookies-accepted", "true");
+    banner?.classList.add("hidden");
+  });
+</script>

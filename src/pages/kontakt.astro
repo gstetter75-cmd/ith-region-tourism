@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Kontakt" description="Kontakt zur Tourist-Information der Ith-Region in Salzhemmendorf.">
+  <section class="pt-28 pb-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Kontakt</h1>
+      <p class="text-anthracite-light text-lg mb-10">
+        Haben Sie Fragen zur Ith-Region? Wir helfen Ihnen gerne weiter.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-xl font-bold mb-6">Tourist-Information</h2>
+          <address class="not-italic space-y-4 text-anthracite">
+            <div>
+              <h3 class="font-semibold text-sm text-anthracite-light uppercase tracking-wider mb-1">Adresse</h3>
+              <p>
+                Flecken Salzhemmendorf<br />
+                Hauptstraße 4<br />
+                31020 Salzhemmendorf
+              </p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-anthracite-light uppercase tracking-wider mb-1">Telefon</h3>
+              <p><a href="tel:+4951535008100" class="text-ith-blue">05153 5008-100</a></p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-anthracite-light uppercase tracking-wider mb-1">E-Mail</h3>
+              <p><a href="mailto:tourismus@salzhemmendorf.de" class="text-ith-blue">tourismus@salzhemmendorf.de</a></p>
+            </div>
+          </address>
+        </div>
+
+        <!-- Contact Form (Netlify Forms) -->
+        <div>
+          <h2 class="text-xl font-bold mb-6">Nachricht senden</h2>
+          <form
+            name="kontakt"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            class="space-y-4"
+          >
+            <input type="hidden" name="form-name" value="kontakt" />
+            <p class="hidden">
+              <label>Nicht ausfüllen: <input name="bot-field" /></label>
+            </p>
+
+            <div>
+              <label for="name" class="block text-sm font-medium text-anthracite mb-1">Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-anthracite mb-1">E-Mail *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label for="subject" class="block text-sm font-medium text-anthracite mb-1">Betreff</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-anthracite mb-1">Nachricht *</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ith-blue focus:border-ith-blue outline-none transition-colors resize-y"
+              ></textarea>
+            </div>
+
+            <div>
+              <label class="flex items-start gap-2 text-sm text-anthracite-light">
+                <input type="checkbox" name="datenschutz" required class="mt-1" />
+                <span>
+                  Ich habe die <a href="/datenschutz/" class="text-ith-blue underline">Datenschutzerklärung</a>
+                  gelesen und bin mit der Verarbeitung meiner Daten einverstanden. *
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary w-full justify-center">
+              Nachricht senden
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

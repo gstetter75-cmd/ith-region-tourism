@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Interaktive Karte" description="Interaktive Karte der Ith-Region: Wanderwege, Sehenswürdigkeiten, Parkplätze und Einkehrmöglichkeiten.">
+  <section class="pt-24 pb-8 bg-white">
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Interaktive Karte</h1>
+      <p class="text-anthracite-light text-lg mb-6">
+        Entdecke Wanderwege, Sehenswürdigkeiten, Parkplätze und Einkehrmöglichkeiten
+        in der Ith-Region.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16">
+    <div class="container mx-auto px-4">
+      <div
+        id="map"
+        class="w-full h-[600px] rounded-xl shadow-lg border border-gray-200"
+      ></div>
+
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-ith-green"></span>
+          <span class="text-anthracite-light">Wanderwege</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-ith-blue"></span>
+          <span class="text-anthracite-light">Sehenswürdigkeiten</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-ith-teal"></span>
+          <span class="text-anthracite-light">Parkplätze</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-ith-red"></span>
+          <span class="text-anthracite-light">Gastronomie</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
+  <script>
+    import L from "leaflet";
+
+    // Center on Ith-Region (between Salzhemmendorf and Coppenbrügge)
+    const map = L.map("map").setView([52.065, 9.60], 12);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18,
+    }).addTo(map);
+
+    // Example markers
+    const markers = [
+      {
+        lat: 52.067,
+        lng: 9.585,
+        title: "Salzhemmendorf",
+        desc: "Zentrum des Fleckens Salzhemmendorf",
+      },
+      {
+        lat: 52.115,
+        lng: 9.545,
+        title: "Coppenbrügge",
+        desc: "Historischer Flecken mit Burg",
+      },
+      {
+        lat: 52.075,
+        lng: 9.57,
+        title: "Ith-Sole-Therme",
+        desc: "Wellness und Badevergnügen",
+      },
+      {
+        lat: 52.09,
+        lng: 9.56,
+        title: "Ith-Kammweg",
+        desc: "Zugang zu Klettergebieten und Aussichtspunkten",
+      },
+    ];
+
+    markers.forEach((m) => {
+      L.marker([m.lat, m.lng])
+        .addTo(map)
+        .bindPopup(`<strong>${m.title}</strong><br>${m.desc}`);
+    });
+  </script>
+</BaseLayout>

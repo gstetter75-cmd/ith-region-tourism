@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <!-- Hill/Mountain shape -->
+  <path d="M10 50 Q40 15 70 35 Q90 10 120 30 Q140 18 160 50 Z" fill="#4A7C59" opacity="0.8"/>
+  <path d="M30 50 Q55 25 80 38 Q100 20 130 35 Q145 25 170 50 Z" fill="#00A5A8" opacity="0.6"/>
+  <!-- Sun -->
+  <circle cx="150" cy="18" r="12" fill="#F5A623" opacity="0.9"/>
+  <!-- Tree -->
+  <path d="M55 30 L60 18 L65 30 Z" fill="#2D5A3A"/>
+  <rect x="58" y="30" width="4" height="8" fill="#6B4226"/>
+</svg>

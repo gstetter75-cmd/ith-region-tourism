@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Card from "../../components/Card.astro";
+
+const activities = [
+  {
+    title: "Wandern",
+    description: "Der preisgekrönte Ith-Hils-Weg und weitere Themenwanderwege laden zu Entdeckungstouren durch das Weserbergland ein.",
+    imageSrc: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=450&fit=crop",
+    imageAlt: "Wanderer auf einem Waldweg",
+    href: "/erleben/wandern/",
+    tag: "Qualitätswanderweg",
+  },
+  {
+    title: "Radfahren",
+    description: "Genussradeln und sportliche Touren durch die sanfte Hügellandschaft zwischen Ith und Hils.",
+    imageSrc: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&h=450&fit=crop",
+    imageAlt: "Radfahrer in der Natur",
+    href: "/erleben/radfahren/",
+    tag: "Radtouren",
+  },
+  {
+    title: "Klettern am Ith",
+    description: "Spektakuläre Felsformationen machen den Ith zu einem der beliebtesten Klettergebiete Norddeutschlands.",
+    imageSrc: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600&h=450&fit=crop",
+    imageAlt: "Kletterer an einer Felswand",
+    href: "/erleben/klettern/",
+    tag: "Klettergebiet",
+  },
+  {
+    title: "Natur & Foto-Spots",
+    description: "Aussichtsplattformen, Sonnenuntergangspunkte und bizarre Felsformationen für unvergessliche Momente.",
+    imageSrc: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=450&fit=crop",
+    imageAlt: "Panoramablick über bewaldete Hügel",
+    href: "/erleben/natur/",
+    tag: "Foto-Spots",
+  },
+  {
+    title: "Kultur & Geschichte",
+    description: "Historische Ortskerne, traditionelles Handwerk, Museen und ein lebendiges Vereinsleben.",
+    imageSrc: "https://images.unsplash.com/photo-1562932831-afcfe735cd7d?w=600&h=450&fit=crop",
+    imageAlt: "Historisches Fachwerkhaus",
+    href: "/erleben/kultur/",
+    tag: "Kultur",
+  },
+  {
+    title: "Familien",
+    description: "Rasti-Land, Erlebniswege, Spielplätze und Naturerlebnisse für Groß und Klein.",
+    imageSrc: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=450&fit=crop",
+    imageAlt: "Familie beim Spaziergang",
+    href: "/erleben/familien/",
+    tag: "Familienfreundlich",
+  },
+];
+---
+
+<BaseLayout title="Erleben" description="Aktivitäten und Erlebnisse in der Ith-Region: Wandern, Radfahren, Klettern, Natur, Kultur und Familienangebote.">
+  <Hero
+    title="Erleben"
+    subtitle="Ob aktiv in der Natur, kulturell interessiert oder auf der Suche nach Familienangeboten – die Ith-Region hat für jeden etwas."
+    imageSrc="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=800&fit=crop"
+    imageAlt="Berglandschaft mit Wanderwegen"
+    size="medium"
+  />
+
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {activities.map((activity) => <Card {...activity} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

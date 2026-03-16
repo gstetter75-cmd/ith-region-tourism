@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+
+const events = [
+  {
+    title: "Osterfeuer in der Ith-Region",
+    date: "2026-04-04",
+    location: "Verschiedene Ortsteile",
+    description: "Traditionelles Osterfeuer in mehreren Ortsteilen – ein geselliges Event für die ganze Familie.",
+    category: "Tradition",
+  },
+  {
+    title: "Frühlingsmarkt Salzhemmendorf",
+    date: "2026-05-09",
+    location: "Ortsmitte Salzhemmendorf",
+    description: "Regionale Produkte, Kunsthandwerk und kulinarische Spezialitäten beim Frühlingsmarkt.",
+    category: "Markt",
+  },
+  {
+    title: "Ith-Wandertag",
+    date: "2026-06-14",
+    location: "Wanderparkplatz Ith",
+    description: "Geführte Wanderungen auf verschiedenen Routen mit Rahmenprogramm und Verpflegung.",
+    category: "Wandern",
+  },
+  {
+    title: "Sommerfest Coppenbrügge",
+    date: "2026-07-18",
+    location: "Burggelände Coppenbrügge",
+    description: "Musik, Kulinarik und Unterhaltung auf dem historischen Burggelände.",
+    category: "Fest",
+  },
+  {
+    title: "Erntefest",
+    date: "2026-09-12",
+    location: "Verschiedene Ortsteile",
+    description: "Traditionelles Erntefest mit Umzug, Musik und regionalen Spezialitäten.",
+    category: "Tradition",
+  },
+  {
+    title: "Adventsmarkt Salzhemmendorf",
+    date: "2026-12-05",
+    location: "Ortsmitte Salzhemmendorf",
+    description: "Weihnachtliche Stimmung mit Glühwein, Handwerk und Leckereien.",
+    category: "Markt",
+  },
+];
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("de-DE", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+const categoryColors: Record<string, string> = {
+  Tradition: "bg-ith-green text-white",
+  Markt: "bg-ith-teal text-white",
+  Wandern: "bg-ith-blue text-white",
+  Fest: "bg-ith-red text-white",
+};
+---
+
+<BaseLayout title="Veranstaltungen" description="Veranstaltungen in der Ith-Region: Märkte, Feste, Wandertage und kulturelle Events.">
+  <Hero
+    title="Veranstaltungen"
+    subtitle="Märkte, Feste, Wandertage und kulturelle Highlights das ganze Jahr über."
+    imageSrc="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&h=800&fit=crop"
+    imageAlt="Festliche Veranstaltung im Freien"
+    size="medium"
+  />
+
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto max-w-4xl">
+      <div class="space-y-6">
+        {events.map((event) => (
+          <article class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+              <div class="sm:w-24 shrink-0 text-center">
+                <span class="block text-3xl font-extrabold text-ith-blue">
+                  {new Date(event.date).getDate()}
+                </span>
+                <span class="block text-sm text-anthracite-light">
+                  {new Date(event.date).toLocaleDateString("de-DE", { month: "short", year: "numeric" })}
+                </span>
+              </div>
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center gap-3 mb-2">
+                  <h3 class="text-lg font-semibold text-ith-blue-dark">{event.title}</h3>
+                  <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColors[event.category] ?? "bg-gray-200 text-gray-700"}`}>
+                    {event.category}
+                  </span>
+                </div>
+                <p class="text-sm text-anthracite-light mb-2">{event.description}</p>
+                <div class="flex items-center gap-1 text-xs text-anthracite-light">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>{event.location}</span>
+                  <span class="mx-2">|</span>
+                  <span>{formatDate(event.date)}</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <p class="text-anthracite-light text-sm">
+          Veranstaltung melden? Kontaktieren Sie uns unter
+          <a href="mailto:tourismus@salzhemmendorf.de" class="text-ith-blue">tourismus@salzhemmendorf.de</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

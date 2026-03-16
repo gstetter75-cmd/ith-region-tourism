@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Card from "../../components/Card.astro";
+---
+
+<BaseLayout title="Entdecken" description="Entdecke die Ith-Region: Salzhemmendorf, Coppenbrügge und ihre Ortsteile im Weserbergland.">
+  <Hero
+    title="Die Region entdecken"
+    subtitle="Zwei Flecken, über 20 Ortsteile und eine gemeinsame Identität im Herzen des Weserberglands."
+    imageSrc="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=800&fit=crop"
+    imageAlt="Grüne Hügellandschaft im Weserbergland"
+    size="medium"
+  />
+
+  <section class="section-padding bg-sand">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card
+          title="Salzhemmendorf"
+          description="Ländliche Idylle mit 11 Ortsteilen, ca. 10.000 Einwohnern und einer reichen Salzgeschichte."
+          imageSrc="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=600&h=450&fit=crop"
+          imageAlt="Ländliche Gemeinde"
+          href="/entdecken/salzhemmendorf/"
+        />
+        <Card
+          title="Coppenbrügge"
+          description="Historischer Flecken mit mittelalterlicher Burg und malerischer Lage am Fuß des Ith."
+          imageSrc="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=450&fit=crop"
+          imageAlt="Historisches Ortsbild"
+          href="/entdecken/coppenbruegge/"
+        />
+        <Card
+          title="Interaktive Karte"
+          description="Alle Highlights, Wanderwege, Parkplätze und Sehenswürdigkeiten auf einen Blick."
+          imageSrc="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&h=450&fit=crop"
+          imageAlt="Kartenansicht"
+          href="/entdecken/karte/"
+          tag="Karte"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

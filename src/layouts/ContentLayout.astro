@@ -1,0 +1,31 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  heroImage: string;
+  heroImageAlt: string;
+  heroSubtitle?: string;
+}
+
+const { title, description, heroImage, heroImageAlt, heroSubtitle } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero
+    title={title}
+    subtitle={heroSubtitle}
+    imageSrc={heroImage}
+    imageAlt={heroImageAlt}
+    size="medium"
+    overlay="medium"
+  />
+
+  <article class="section-padding bg-white">
+    <div class="container mx-auto prose prose-lg max-w-4xl">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

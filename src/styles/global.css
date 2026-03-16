@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ===== Ith-Region Design Tokens ===== */
+@theme {
+  /* Primary Colors (derived from salzhemmendorf.de) */
+  --color-ith-blue: #0174c3;
+  --color-ith-blue-dark: #004D81;
+  --color-ith-blue-light: #e8f4fd;
+
+  /* Accent Colors */
+  --color-ith-teal: #00A5A8;
+  --color-ith-teal-dark: #008587;
+  --color-ith-green: #4A7C59;
+  --color-ith-green-light: #6B9E7A;
+
+  /* Warm/Neutral */
+  --color-sand: #F5F0E8;
+  --color-sand-dark: #E8DFD0;
+  --color-anthracite: #2D3436;
+  --color-anthracite-light: #636e72;
+
+  /* Alert */
+  --color-ith-red: #d53f3f;
+
+  /* Fonts */
+  --font-heading: "Inter", "Arial", "Helvetica", sans-serif;
+  --font-body: "Inter", "Arial", "Helvetica", sans-serif;
+
+  /* Spacing */
+  --spacing-section: 5rem;
+  --spacing-section-sm: 3rem;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-anthracite);
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-ith-blue-dark);
+  }
+
+  h1 { font-size: 2.75rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+
+  a {
+    color: var(--color-ith-blue);
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+  a:hover {
+    color: var(--color-ith-teal);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ===== Component Styles ===== */
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: var(--color-ith-blue);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-ith-blue-dark);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(1, 116, 195, 0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border: 2px solid var(--color-ith-blue);
+    color: var(--color-ith-blue);
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-ith-blue);
+    color: white;
+  }
+
+  .section-padding {
+    padding-block: var(--spacing-section);
+    padding-inline: 1.5rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+}
